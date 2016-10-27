@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Cnt">К-ть</string>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Перейти на головний"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Перейти вгору"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Інші опції"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Готово"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Переглянути всі"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Вибрати програму"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"ВИМК."</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"УВІМК."</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Пошук…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Очистити запит"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Пошуковий запит"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Пошук"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Надіслати запит"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Голосовий пошук"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Надіслати через"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Надіслати через %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Згорнути"</string>
+    <string name="about_app">Про додаток</string>
+    <string name="about_app_head">Програма Barcode ScannerINVпризначена для роботи з базою даних облікового програмного забезпечення (див. посилання) для проведення віддаленого переобліку за допомогою мобільного пристою.    Програма може працювати із пов\'язаним bluetooth сканером або ж використовувати вбудовану камеру.  </string>
+    <string name="app_name">Barcode ScannerINV</string>
+    <string name="art">арт.</string>
+    <string name="articul">артикул</string>
+    <string name="attention">Увага!</string>
+    <string name="back">Назад</string>
+    <string name="barc">ш/к</string>
+    <string name="barcode">штрихкод</string>
+    <string name="bill">Накладна:</string>
+    <string name="bill_in">Прихід</string>
+    <string name="bill_in_list">Накладна приходу:</string>
+    <string name="bill_move">Переміщення</string>
+    <string name="bill_out">Розхід</string>
+    <string name="but">бут</string>
+    <string name="cancel">Скасувати</string>
+    <string name="cant_open_file">Не вдалося відкрити файл</string>
+    <string name="catalog_of_goods">Каталог товару</string>
+    <string name="choose_1">Автономно, у якості терміналу збора даних</string>
+    <string name="choose_2">Я маю спеціальне сумісне облікове програмне забезпечення</string>
+    <string name="choose_file">Завантажити з .XLS або .CSV файлу</string>
+    <string name="clear">Видалити  записи</string>
+    <string name="clear_dic">Видалити дані</string>
+    <string name="cnt_goods_on_mobile">Товарів на пристрої:</string>
+    <string name="cnt_goods_on_server">Товарів на сервері:</string>
+    <string name="connect">З\'єднати</string>
+    <string name="connected">З\'єднано</string>
+    <string name="connecting">Триває з\'єднання з сервером...</string>
+    <string name="count_of_scanned_goods">Кількість знайдених товарів</string>
+    <string name="create">Створити</string>
+    <string name="create_inventory">Створення переобліку</string>
+    <string name="create_new_good">Добавить товар?</string>
+    <string name="date">Дата</string>
+    <string name="db_version">версія бази даних</string>
+    <string name="delete">Видалити</string>
+    <string name="delete_inventory">Видалити переоблік</string>
+    <string name="delete_inventory_dialog">Ви дійсно бажаєте видалити переоблік?</string>
+    <string name="descr_excel">Для завантаження номенклатури товарів оберіть .CSV або  .XLS (Excel 97-2003).     Структура файлу товарів має відповідати вказаному зразку.</string>
+    <string name="dic_goods">Довідник товарів</string>
+    <string name="error">Помилка</string>
+    <string name="error_connect">Відсутній зв\'язок з мережею</string>
+    <string name="error_send">Під час передачі даних виникли помилки</string>
+    <string name="exist_acc">За даним документом було знайдено раніше змінені дані. Оберіть дію, що необхідно виконати </string>
+    <string name="exit">Вихід</string>
+    <string name="export_count">Експортовано позицій:</string>
+    <string name="export_error">Помилка запису файла</string>
+    <string name="export_file">Експорт...</string>
+    <string name="export_server">Відправити на сервер</string>
+    <string name="export_success">Файл переобліку створено у теці /BarcodeScanner/</string>
+    <string name="export_to_xls">Експорт переобліку в Excel</string>
+    <string name="good_not_found_create">Нічого не знайдено. Створити нову позицію?</string>
+    <string name="goods">Товари</string>
+    <string name="ignore">Відміна</string>
+    <string name="import_from_excel">Імпорт товарів з файлу</string>
+    <string name="import_to_xls">import_to_xls</string>
+    <string name="import_xls">Імпорт номенклатури</string>
+    <string name="in_price">закупівельна ціна</string>
+    <string name="info1">Завантажити сервер і необхідну документацію можна за посиланням:</string>
+    <string name="info_email">З питань підтримки або придбання ліцензії можна зв\'язатися з розробником за адресою:</string>
+    <string name="info_uns">Завантажити облікове програмне забезпечення можно за посиланням:</string>
+    <string name="inventory">Переоблік</string>
+    <string name="inventory_list">Акти переобліку:</string>
+    <string name="ip_address_server">IP address of server</string>
+    <string name="keep_system">1. Система переобліку</string>
+    <string name="keep_system_details">Підготуйте облікове програмне забезпечення, в якому ведеться товарний облік. Акти переобліку створюються в бек-офісі у відповідному розділі. Після створення акту, його необхідно заповнити згідно з інструкцією облікового ПЗ. Знайти дистрибутив програми обліку можна за посиланням:</string>
+    <string name="keyboard_settings">Налаштування методу вводу</string>
+    <string name="kg">кг</string>
+    <string name="labelled">збережено</string>
+    <string name="list_of_goods">Перелік товарів</string>
+    <string name="loading_goods">Триває завантаження товарів...</string>
+    <string name="message">Повідомлення:</string>
+    <string name="mobile_app">3. Налаштування додатку</string>
+    <string name="mobile_details">Вкажіть IP адресу компьютера, на якому встановлено BarcodeServer. Перевірте підключення до WiFi, стан сервера і доступність порту 8080 на компьютері.</string>
+    <string name="name">Назва</string>
+    <string name="name_or_barc">назва або штрихкод</string>
+    <string name="next">Далі</string>
+    <string name="no_ask_more">більше не пропонувати створити товар</string>
+    <string name="no_connect_to_database">Помилка з\'єднання з базою даних</string>
+    <string name="no_connect_to_server">Помилка з\'єднання з сервером</string>
+    <string name="normal_scan">звичайний</string>
+    <string name="not_create_new_good">Не додавати новий товар</string>
+    <string name="num">№ док.</string>
+    <string name="offline_mode">Автономний режим</string>
+    <string name="offline_work">Робота автономно</string>
+    <string name="out_price">роздрібна ціна</string>
+    <string name="plus_fact_cnt">додати факт. к-ть</string>
+    <string name="plus_one_position">додати 1 одиницю</string>
+    <string name="price">ціна:</string>
+    <string name="quick_start">швидкий старт</string>
+    <string name="rate_this_app">Оцінити додаток</string>
+    <string name="ready">Готово</string>
+    <string name="retry">Повторити</string>
+    <string name="saved">збережено</string>
+    <string name="scan_mode">Режим сканування:</string>
+    <string name="scan_parameters">Параметри сканування:</string>
+    <string name="scanner">4. Bluetooth cканер</string>
+    <string name="scanner_details">Для швидкого сканування штрихкодів ви можете під\'єднати до телефону бездротовий bluetooth сканер. Для цього скористуйтеся меню налаштувань телефону розділом bluetooth пристрої. Також ви можете сканувати штрихкоди камерою телефона за наявності автофокуса і високої роздільної здатності камери. Пошут товару можна також здійснити за назвою, артикулом або штрихкодом вручну. Для кафе і ресторанів додатково можна скористатися списком товарів.</string>
+    <string name="search">Знайти</string>
+    <string name="server_system">2. Сервер обміну даними</string>
+    <string name="settings">Налаштування</string>
+    <string name="settings_input_method">Налаштування клавіатури і вводу</string>
+    <string name="settings_inventory">Налаштування переобліку</string>
+    <string name="sht">шт</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="subdivision">Підрозділ</string>
+    <string name="success_send">Передано всі знайдені зміни</string>
+    <string name="tsd">Термінал Збору Даних </string>
+    <string name="tsd_description">Ваш телефон може працювати в режимі Терміналу збора даних. Для цього завантажте на телефон excel (2003) файл зі списком номенклатури. Далі створіть документ переобліку та проведіть інвентаризацію. За допомогою меню переобліка збережіть його результати в файл на телефон і скопіюйте їх на ПК.     Використовуйте можливості Вашого облікового програмного забезпечення для обміну даних з телефоном за допомогою excel таблиць.</string>
+    <string name="turn_off_flashlight">Вимкнути ліхтарик</string>
+    <string name="turn_on_flashlight">Увімкнути ліхтарик</string>
+    <string name="uah">грн.</string>
+    <string name="unit">од. вим.</string>
+    <string name="update_dic">Оновити довідники</string>
+    <string name="warning">Додаток Barcode ScannerINV не є частиною обліково-торгового комплексу, відповідно всі питання і зауваження щодо роботи програми Barcode ScannerINV слід пред\'являти розробнику даного додатку за вказаною нижче адресою. Компанія-власник облікового програмного забезпечення не несе ніякої відповідальності за додаток Barcode ScannerINV</string>
+    <string name="wellcome">Ласкаво просимо до системи мобільного обліку BarcodeScanner!<br/> Для налаштування додатку слідкуйте короткій інструкції.</string>
+    <string name="wellcome_choose">Ласкаво просимо до системи мобільного обліку BarcodeScanner!<br/> Як ви бажаєте використовувати додаток?</string>
+    <string name="work_autonom_mode">Ви працюєте в автономному режимі</string>
+    <string name="write_off">Списання</string>
+    <string name="zxing_app_name">Сканер штрих-кодів</string>
+    <string name="zxing_button_ok">OK</string>
+    <string name="zxing_msg_camera_framework_bug">Нажаль, виникла помилка камери. Можливо, вам знадобиться перезавантажити пристрій.</string>
+    <string name="zxing_msg_default_status">Щоб відсканувати штрих-код, помістіть його в прямокутник видошукача.</string>
+</resources>

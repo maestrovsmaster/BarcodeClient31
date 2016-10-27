@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\.gradle\caches\modules-2\files-2.1\commons-collections\commons-collections\3.2.1\761ea405b9b37ced573d2df0d1e3a4e0f9edc668\commons-collections-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="761ea405b9b37ced573d2df0d1e3a4e0f9edc668">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\commons-collections-3.2.1_42f98e9e7b7f1c9f853f9bd766fcaca1eb42692c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_398f42340c266501c955c4fd5d26206fc70e5761.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_9cec64271d4699e3ce542761a8fd33dc0bd2dd11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_3ea24fddf7c4ceaaca16066426fbd7c0d794a17c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\.gradle\caches\modules-2\files-2.1\com.opencsv\opencsv\3.8\248d4d05fe253a02a05601978f7de1305b8a961e\opencsv-3.8.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="248d4d05fe253a02a05601978f7de1305b8a961e">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\opencsv-3.8_c1e32b769aa956d88cc8a2726e11c2060dbe808a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\libs\poi-3.7.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="581aca996554d760c02b281ac1f9efb785de54be">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\poi-3.7_9361abb002e561ba247b793282b65747cb90eadb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\libs\jaybird-full-2.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5398c4ca8439931cce45f5bb7fd1f9a3534ab1d0">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\jaybird-full-2.2.1_6b7aaf431438a6eaed04d444754239fcccf9e924.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_6b5ce6efa15e0f32fd243e0f8537355851773bd7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.4\5fe28b9518e58819180a43a850fbc0dd24b7c050\commons-lang3-3.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\commons-lang3-3.4_f44aaeb70ae3e4819d947b30592e04e83aa62473.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_692be644377508f9e36fa404cf9f10c3f1072a5f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\.gradle\caches\modules-2\files-2.1\commons-beanutils\commons-beanutils\1.9.2\7a87d845ad3a155297e8f67d9008f4c1e5656b71\commons-beanutils-1.9.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="7a87d845ad3a155297e8f67d9008f4c1e5656b71">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\commons-beanutils-1.9.2_35fd8637de8ffd58e04caa25fbf532e2b136408a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\Dropbox\BarcodeClient31\app\build\intermediates\exploded-aar\com.journeyapps\zxing-android-embedded\3.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="29c426f3ff52238291c86e939dff6bd8a877b86c">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\com.journeyapps-zxing-android-embedded-3.3.0_c45f1c3320aeb9e53c28f06c3d06832a47651d1d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.2.1\2287494d4f5f9f3a9a2bb6980e3f32053721b315\core-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\core-3.2.1_69e100ed47cf2eae0d6dffcf826f3ed55c3d4cd5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\userd088\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\Dropbox\BarcodeClient31\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_9831fd2291f7ad9e56afa63782cc745078651755.jar" />
+    </item>
+
+</items>

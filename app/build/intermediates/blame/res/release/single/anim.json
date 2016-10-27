@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_top.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\alpha.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\alpha.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\rigth_exit.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\rigth_exit.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_enter.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_bottom.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\go_prev_out.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\go_prev_out.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_top.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\rigth_input.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\rigth_input.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\go_next_out.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\go_next_out.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\design_snackbar_in.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_in.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_popup_exit.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\go_prev_in.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\go_prev_in.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\design_fab_in.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_out.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\open_text_view.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\open_text_view.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\design_fab_out.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\left_exit.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\left_exit.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\design_snackbar_out.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_out.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\alpha_600.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\alpha_600.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\slide_up.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\slide_up.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\close_text_view.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\close_text_view.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_in.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\slide_down.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\slide_down.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\alpha_anim.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\alpha_anim.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\go_next_in.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\src\\main\\res\\anim\\go_next_in.xml"
+    },
+    {
+        "merged": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_bottom.xml",
+        "source": "D:\\Dropbox\\BarcodeClient31\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_bottom.xml"
+    }
+]

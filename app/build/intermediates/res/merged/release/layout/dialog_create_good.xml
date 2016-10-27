@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/barcode"
+        android:id="@+id/textView6"
+        android:textColor="@color/ligth_gray"
+        android:visibility="invisible" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/barcodeET"
+        android:hint="@string/barcode"
+        android:textColorHint="@color/red_70"
+        android:textColor="@color/indigo_900"
+        android:textSize="24sp"
+        android:background="@drawable/indigo_stroke"
+        android:paddingLeft="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/name"
+        android:id="@+id/textView7"
+        android:visibility="invisible" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameET"
+        android:hint="@string/name"
+        android:textColorHint="@color/red_70"
+        android:textColor="@color/indigo_900"
+        android:textSize="24sp"
+        android:background="@drawable/indigo_stroke"
+        android:paddingLeft="6dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/unit"
+        android:id="@+id/textView8"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unitSpinner"
+            android:background="@drawable/indigo_stroke" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editUnit"
+            android:layout_toLeftOf="@+id/okUnitBt"
+            android:visibility="gone" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@android:string/ok"
+            android:id="@+id/okUnitBt"
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:id="@+id/cancelGood"
+            android:layout_weight="1"
+            android:background="@drawable/indigo_red_button"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@android:string/ok"
+            android:id="@+id/createGood"
+            android:layout_weight="1"
+            android:background="@drawable/indigo_green_dark_button"
+            android:layout_margin="2dp" />
+
+    </LinearLayout>
+
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/no_ask_more"
+        android:id="@+id/notAskMore" />
+</LinearLayout>

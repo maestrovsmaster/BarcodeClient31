@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <color android:id="@+id/color1" name="navy" android:layout_width="wrap_content" android:layout_height="wrap_content">#21639d</color>
+    <color android:id="@+id/color2" name="blue" android:layout_width="wrap_content" android:layout_height="wrap_content">#3076b4</color>
+    <color android:id="@+id/color3" name="lightblue" android:layout_width="wrap_content" android:layout_height="wrap_content">#72aadb</color>
+    <color android:id="@+id/color4" name="white" android:layout_width="wrap_content" android:layout_height="wrap_content">#ffffff</color>
+    <color android:id="@+id/color4" name="white_alph20" android:layout_width="wrap_content" android:layout_height="wrap_content">#ccffffff</color>
+    <color android:id="@+id/color5" name="red" android:layout_width="wrap_content" android:layout_height="wrap_content">#ff0000</color>
+    <color android:id="@+id/color6" name="dark_gray" android:layout_width="wrap_content" android:layout_height="wrap_content"> #333331</color>
+    <color android:id="@+id/color7" name="crimea" android:layout_width="wrap_content" android:layout_height="wrap_content"> #fffdf1</color>
+    <color android:id="@+id/color6" name="ligth_gray" android:layout_width="wrap_content" android:layout_height="wrap_content">  #b3b2aa</color>
+    <color android:id="@+id/color6" name="very_ligth_gray" android:layout_width="wrap_content" android:layout_height="wrap_content">  #cccbc2</color>
+    <color android:id="@+id/color8" name="ash" android:layout_width="wrap_content" android:layout_height="wrap_content"> #9d9d95</color>
+    <color android:id="@+id/color9" name="lime" android:layout_width="wrap_content" android:layout_height="wrap_content">#47b312</color>
+    <color android:id="@+id/color9" name="lime_higth" android:layout_width="wrap_content" android:layout_height="wrap_content"> #90d170</color>
+    <color android:id="@+id/color9" name="login_blue" android:layout_width="wrap_content" android:layout_height="wrap_content"> #2d6fa1</color>
+     <color android:id="@+id/color3" name="transgray" android:layout_width="wrap_content" android:layout_height="wrap_content">#BF333331</color>
+    <color android:id="@+id/color3" name="settings_background" android:layout_width="wrap_content" android:layout_height="wrap_content">#E6E4DA</color>
+    <color android:id="@+id/color3" name="settings_gray" android:layout_width="wrap_content" android:layout_height="wrap_content">#999891</color>
+    
+    <color android:id="@+id/color3" name="orange_logout" android:layout_width="wrap_content" android:layout_height="wrap_content">#FF401A</color>
+    <color android:id="@+id/color3" name="orange_settings_err" android:layout_width="wrap_content" android:layout_height="wrap_content">#CCe3573f</color>
+    
+     <color name="dark_gray_a30" android:layout_width="wrap_content" android:layout_height="wrap_content"> #33333331</color>
+     <color name="dark_gray_a50" android:layout_width="wrap_content" android:layout_height="wrap_content"> #80333331</color>
+     <color name="dark_gray_a70" android:layout_width="wrap_content" android:layout_height="wrap_content"> #B3333331</color>
+     
+     <color name="navy_a50" android:layout_width="wrap_content" android:layout_height="wrap_content">#8021639d</color>
+   
+    <color android:id="@+id/color9" name="gold" android:layout_width="wrap_content" android:layout_height="wrap_content">  #ffc000</color>
+   
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#303030</color>
+    <color name="list_background_pressed">#992416</color>
+    <color name="list_divider">#272727</color>
+
+    <color name="red_50">#80FF401A</color>
+    
+    
+    <color name="indigo_500">#3F51B5</color>
+    <color name="indigo_50">#E8EAF6</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="indigo_200">#9FA8DA</color>
+    <color name="indigo_300">#7986CB</color>
+    <color name="indigo_400">#5C6BC0</color>
+    <color name="indigo_600">#3949AB</color>
+    <color name="indigo_700">#303f9f</color>
+    <color name="indigo_800">#283593</color>
+    <color name="indigo_900">#1A237E</color>
+    
+    <color name="indigo_100_a50">#80c5cae9</color>
+    <color name="indigo_200_a50">#809FA8DA</color>
+    <color name="indigo_500_a50">#803F51B5</color>
+    <color name="indigo_500_a70">#B33F51B5</color>
+    <color name="indigo_500_a30">#333F51B5</color>
+    <color name="indigo_400_a50">#805C6BC0</color>
+    <color name="indigo_500_a90">#1A3F51B5</color>
+
+    <color name="colorAccent">#FF4081</color>
+    
+    
+    <color name="indigo_A100">#8C9EFF</color>
+    <color name="indigo_A200">#536DFE</color>
+    <color name="indigo_A400">#3D5AFE</color>
+    <color name="indigo_A700">#304FFE</color>
+
+    <color name="black_overlay">#66000000</color>
+    
+    
+   <color name="green">#3D8B37</color>
+    <color name="green_light">#67bf60</color>
+    <color name="gray_background">#f5f6f9</color>
+    <color name="green_background_light">#cde2cc</color>
+
+    <color name="indigo_green">#79cbb4</color>
+    <color name="indigo_green_dark">#6db7a3</color>
+    <color name="indigo_green_dark_2">#64a795</color>
+
+    <color name="indigo_pink">#e4a1ce</color>
+    <color name="indigo_pink_dark">#c677ad</color>
+
+    <color name="indigo_blue">#5c7dc0</color>
+    <color name="indigo_magenta">#c19ad6</color>
+    <color name="indigo_material_lime">#d4e157</color>
+
+
+    <color name="transparent_100">#00FFFFFF</color>
+    <color name="transparent_90">#1AFFFFFF</color>
+    <color name="red_70">#59e7ab9f</color>
+    <color name="indigo_dark_green_alph">#c1164140</color>
+    <color name="indigo_blue_dark_alp">#46050d3d</color>
+
+
+</resources>

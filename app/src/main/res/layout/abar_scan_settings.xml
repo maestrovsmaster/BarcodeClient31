@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="48dp"
+    android:background="@color/indigo_600"
+    >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/closeButton"
+        android:background="@drawable/transparent_nobord_button"
+        android:src="@drawable/ic_arrow_back_white_36dp"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/abarTitle"
+        android:layout_toRightOf="@+id/closeButton"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginRight="48dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:paddingLeft="5dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:id="@+id/offlineIcon"
+
+
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="12dp"
+        android:layout_toRightOf="@+id/closeButton"
+        android:visibility="gone"
+        android:scaleType="fitCenter"
+        android:alpha=".8"
+        android:text="A"
+        android:textColor="@color/white"
+        android:gravity="center_vertical|center_horizontal" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/listIcon"
+        android:src="@drawable/ic_menu_white_36dp"
+
+        android:visibility="visible"
+        android:background="@drawable/transparent_nobord_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <ImageButton
+        android:id="@+id/searchBt"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_search_white_36dp"
+        android:layout_marginLeft="2dp"
+        android:alpha=".7"
+        android:visibility="visible"
+        android:background="@drawable/transparent_nobord_button" />
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="true"
+
+        android:ems="10"
+        android:layout_toLeftOf="@+id/searchBt"
+        android:gravity="center_vertical"
+        android:drawableRight="@drawable/close_32"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:layout_toRightOf="@+id/listIcon"
+        android:drawablePadding="4dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:hint="@string/name_or_barc"
+        android:textColorHint="@color/indigo_100_a50"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:background="@color/white_alph20"
+        android:textColor="@color/dark_gray"
+        android:layout_margin="4dp" />
+
+</RelativeLayout>

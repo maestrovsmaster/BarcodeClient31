@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+    <!-- Framelayout to display Fragments -->
+
+    <FrameLayout
+        android:id="@+id/set_frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:text="@string/next"
+        android:id="@+id/buttonNext"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/wellcome_button_selector"
+        android:textColor="@color/white"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:text="@string/back"
+        android:id="@+id/buttonBack"
+        android:background="@drawable/wellcome_button_selector"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="visible"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+   
+
+</RelativeLayout>

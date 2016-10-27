@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jaybird-full-2.2.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/jaybird-full-2.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
