@@ -335,7 +335,7 @@ public class DockListActivity extends AppCompatActivity //ListActivity
                 @Override
                 public void run() {
                     Toast.makeText(DockListActivity.this, ans,
-                            Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_SHORT).show();
                 }
             });
         }
