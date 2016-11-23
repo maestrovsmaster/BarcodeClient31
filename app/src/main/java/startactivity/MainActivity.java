@@ -44,7 +44,7 @@ import start.WellcomeActivity2;
 
 public class MainActivity extends Activity {
 
-
+//hi!
     public static String device_id = "";
     public static String device_name = "";
 
