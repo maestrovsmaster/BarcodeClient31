@@ -220,6 +220,7 @@ public class NewScannerActivity extends ListActivity implements
                     switchFlashlightButton.setVisibility(View.INVISIBLE);
                     //capture.onPause();
                     barcodeScannerView.pause();
+                    MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_OFF);
 
                 }
                 else{
@@ -229,6 +230,7 @@ public class NewScannerActivity extends ListActivity implements
                     switchFlashlightButton.setVisibility(View.VISIBLE);
                     //capture.onResume();
                     barcodeScannerView.resume();
+                    MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_ON);
                 }
             }
         });
@@ -1765,6 +1767,15 @@ public class NewScannerActivity extends ListActivity implements
                 }
             });
 
+            view.findViewById(R.id.back_to_invs).setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.putExtra("", "");
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            });
+
             view.findViewById(R.id.key).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     InputMethodManager inputMethodManager = (InputMethodManager)
@@ -2151,6 +2162,18 @@ public class NewScannerActivity extends ListActivity implements
         super.onResume();
         //capture.onResume();
         barcodeScannerView.resume();
+
+        String state = MainApplication.dbHelper.getOption(MainApplication.CAMERA_STATE);
+        if(state!=null)
+        if(state.equals(MainApplication.CAMERA_OFF)) {
+            hideCameraButton.setTag("1");
+            hideCameraButton.setImageResource(R.drawable.ic_camera_alt_white_36dp);
+            barcodeScannerView.setVisibility(View.GONE);
+            switchFlashlightButton.setVisibility(View.INVISIBLE);
+            //capture.onPause();
+            barcodeScannerView.pause();
+            MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_OFF);
+        }
     }
 
     @Override

@@ -22,6 +22,11 @@ public class MainApplication extends Application {
     public static SQLiteDatabase sdb;
     public static DatabaseHelper dbHelper = null;
 
+    public static String CAMERA_STATE="CAMERA_STATE";
+    public static String CAMERA_ON="CAMERA_ON";
+    public static String CAMERA_OFF="CAMERA_OFF";
+    public static int UPDATE_STATE = 18;
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -27,6 +27,7 @@
     <string name="articul">артикул</string>
     <string name="attention">Внимание!</string>
     <string name="back">Назад</string>
+    <string name="back_to_invs_list">Вернуться к списку переучетов</string>
     <string name="barc">ш/к</string>
     <string name="barcode">штрихкод</string>
     <string name="bill">Накладная:</string>

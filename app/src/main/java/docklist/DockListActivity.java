@@ -132,6 +132,8 @@ public class DockListActivity extends AppCompatActivity //ListActivity
                 currentDateTimeString = dateFormatter.format(today);
 
 
+
+
                 try{
                     crInvId=Integer.parseInt(createInvId);
                 }catch (Exception e){}
@@ -224,6 +226,27 @@ public class DockListActivity extends AppCompatActivity //ListActivity
     @Override
     protected void onResume() {
         super.onResume();
+        //docList.clear();
+       /* switch (docType) {
+            case 0:
+                Log.d("my","Переучет");
+                title.setText(getResources().getString(R.string.inventory));
+                if(MainActivity.OFFLINE_MODE) loadDocListOffline();
+                else   loadDocList();
+                break;
+            case 1:
+                title.setText(getResources().getString(R.string.bill_in));
+                loadBillInList();
+                break;
+        }*/
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //if (data == null) {return;}
+        Log.d("my"," RESULT CODE = "+resultCode+" request code = "+requestCode);
         switch (docType) {
             case 0:
                 Log.d("my","Переучет");
@@ -236,8 +259,9 @@ public class DockListActivity extends AppCompatActivity //ListActivity
                 loadBillInList();
                 break;
         }
-
     }
+
+
 
     TextView countDocksDB;
 
@@ -256,9 +280,14 @@ public class DockListActivity extends AppCompatActivity //ListActivity
 
         @Override
         public void run() {
+
+
             RequestInventoryList requestInventoryList = new RequestInventoryList();
 
-           // if (!MainActivity.OFFLINE_MODE) docList.clear();/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (!MainActivity.OFFLINE_MODE){
+                Log.d("my"," CLEAR=====================");
+                docList.clear();/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
             docList.addAll(requestInventoryList.getInventoryList());
             Log.d("my", "!!!!thread: invlist sz = " + docList.size());
 

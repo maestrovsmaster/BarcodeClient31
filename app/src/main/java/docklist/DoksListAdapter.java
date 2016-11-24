@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import essences.BillIn;
 import essences.Inventory;
 import essences.JorHeadTable;
+import main.MainApplication;
 import newmainscanner.NewScannerActivity;
-import scanworkingactivity.ScanWorkingActivity;
 
 
 public class DoksListAdapter<T> extends ArrayAdapter<JorHeadTable> {
@@ -29,9 +29,11 @@ public class DoksListAdapter<T> extends ArrayAdapter<JorHeadTable> {
 	
 		private ArrayList<JorHeadTable> inventories;
 
-		
-		public DoksListAdapter(Context context, int textViewResourceId, ArrayList<JorHeadTable> objects) {
+	DockListActivity context;
+
+		public DoksListAdapter(DockListActivity context, int textViewResourceId, ArrayList<JorHeadTable> objects) {
 			super(context, textViewResourceId, objects);
+			this.context=context;
 			this.inventories = objects;
 		}
 
@@ -47,7 +49,7 @@ public class DoksListAdapter<T> extends ArrayAdapter<JorHeadTable> {
 		@SuppressLint("NewApi")
 		public View getView(int position, final View convertView, ViewGroup parent){
 
-			Log.d("my", "*--");
+			//Log.d("my", "*--");
 			 v = convertView;
 
 			
@@ -79,7 +81,7 @@ public class DoksListAdapter<T> extends ArrayAdapter<JorHeadTable> {
 
 						
 						//Intent intent = new Intent(v.getContext(),	ScanWorkingActivity.class);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-							Intent intent = new Intent(v.getContext(),	NewScannerActivity.class);
+							Intent intent = new Intent(v.getContext(), NewScannerActivity.class);
 					
 						Bundle arg = new Bundle();
 						arg.putInt("id", id);
@@ -88,8 +90,7 @@ public class DoksListAdapter<T> extends ArrayAdapter<JorHeadTable> {
 						arg.putInt("docType", docType);
 						
 						intent.putExtras(arg);
-						
-						v.getContext().startActivity(intent);
+							context.startActivityForResult(intent, MainApplication.UPDATE_STATE);
 						}
 
 						if(tag instanceof BillIn){

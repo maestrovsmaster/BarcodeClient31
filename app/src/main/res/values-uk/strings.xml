@@ -118,4 +118,5 @@
     <string name="rate_this_app">Оцінити додаток</string>
     <string name="turn_off_flashlight">Вимкнути ліхтарик</string>
     <string name="turn_on_flashlight">Увімкнути ліхтарик</string>
+    <string name="back_to_invs_list">Повернутися до списку переобліків</string>
 </resources>
