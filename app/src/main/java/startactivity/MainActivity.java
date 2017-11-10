@@ -99,14 +99,14 @@ public class MainActivity extends Activity {
 
 
         mainActionBar = getActionBar(); //main bar
-        mainActionBar.setDisplayShowCustomEnabled(true);
+//        mainActionBar.setDisplayShowCustomEnabled(true);
 
 
 
         //mainActionBar.hide();
 
-        mainActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(
-                R.color.indigo_600)));
+//        mainActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(
+  //              R.color.indigo_600)));
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -138,8 +138,8 @@ public class MainActivity extends Activity {
             Log.d("my", " a bar error = " + e.toString());
         }
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer, // nav menu toggle icon

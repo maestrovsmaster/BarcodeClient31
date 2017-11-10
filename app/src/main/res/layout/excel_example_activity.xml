@@ -39,27 +39,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/writeExcel"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Write Excel File"
-            android:visibility="gone"></Button>
-
-        <Button
-            android:id="@+id/readExcel"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Read Excel File"
-            android:visibility="gone"></Button>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/descr_excel"
             android:id="@+id/textView3"
             android:padding="10dp"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:layout_width="match_parent"

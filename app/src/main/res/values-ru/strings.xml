@@ -119,4 +119,5 @@
     <string name="turn_off_flashlight">Выключить фонарик</string>
     <string name="turn_on_flashlight">Включить фонарик</string>
     <string name="back_to_invs_list">Вернуться к списку переучетов</string>
+    <string name="adding_of_new_good">Добавление нового товара</string>
 </resources>

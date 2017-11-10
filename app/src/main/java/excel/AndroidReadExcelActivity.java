@@ -31,6 +31,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,7 +62,7 @@ import essences.Good;
 import main.MainApplication;
 import startactivity.MainActivity;
 
-public class AndroidReadExcelActivity extends ListActivity implements OnClickListener {
+public class AndroidReadExcelActivity extends ListActivity {
 
 
     TextView countOfGoods;
@@ -70,8 +71,7 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
     ImportGoodsListAdapter<Good> importGoodsListAdapter;
     ArrayList<Good> goodsList = new ArrayList<>();
 
-    private static final String inExcelFileName = "import.xls";
-    private static final String outExcelFileName = "export.xls";
+    ProgressDialog pd;
 
 
     /**
@@ -83,11 +83,6 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.excel_example_activity);
 
-
-        View writeExcelButton = findViewById(R.id.writeExcel);
-        writeExcelButton.setOnClickListener(this);
-        View readExcelButton = findViewById(R.id.readExcel);
-        readExcelButton.setOnClickListener(this);
 
 
         countOfGoods = (TextView) findViewById(R.id.countOfGoods);
@@ -139,248 +134,202 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
 
             }
         });
-
-
-       /* h0.postAtTime(new Runnable() {
-            @Override
-            public void run() {
-                readExcelFile(AndroidReadExcelActivity.this, inExcelFileName);
-            }
-        },500);*/
     }
 
     Handler h0 = new Handler();
+    Handler readExcelFileHandler = new Handler();
 
 
+    class ReadEXLfile extends Thread {
+        String filename="";
 
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.writeExcel:
-                saveExcelFile(this, outExcelFileName);
-                break;
-            case R.id.readExcel:
-                readExcelFile(this, inExcelFileName);
-                break;
-        }
-    }
-
-
-    private static boolean saveExcelFile(Context context, String fileName) {
-
-        // check if available and not read only
-        if (!FileLoader.isExternalStorageAvailable() || FileLoader.isExternalStorageReadOnly()) {
-            Log.w("FileUtils", "Storage not available or read only");
-            return false;
+        public  ReadEXLfile(String filename)
+        {
+            this.filename=filename;
         }
 
-        boolean success = false;
-
-        //New Workbook
-        Workbook wb = new HSSFWorkbook();
-
-        Cell c = null;
-
-        //Cell style for header row
-        CellStyle cs = wb.createCellStyle();
-        cs.setFillForegroundColor(HSSFColor.LIME.index);
-        cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-
-        //New Sheet
-        Sheet sheet1 = null;
-        sheet1 = wb.createSheet("myOrder");
-
-        // Generate column headings
-        Row row = sheet1.createRow(0);
-
-        c = row.createCell(0);
-        c.setCellValue("Item Number");
-        c.setCellStyle(cs);
-
-        c = row.createCell(1);
-        c.setCellValue("Quantity");
-        c.setCellStyle(cs);
-
-        c = row.createCell(2);
-        c.setCellValue("Price");
-        c.setCellStyle(cs);
-
-        sheet1.setColumnWidth(0, (15 * 500));
-        sheet1.setColumnWidth(1, (15 * 500));
-        sheet1.setColumnWidth(2, (15 * 500));
 
 
+         public void run() {
 
 
-        success = FileLoader.writeExcel(wb, fileName);
+            Log.d("my", "filename = " + filename);
 
-        return success;
-    }
+            if (filename == null) {
+                Toast.makeText(AndroidReadExcelActivity.this, getString(R.string.cant_open_file), Toast.LENGTH_SHORT);
+                return;
+            }
 
-    private  void readExcelFile(Context context, String filename) {
+            if (!FileLoader.isExternalStorageAvailable() || FileLoader.isExternalStorageReadOnly()) {
+                Log.w("FileUtils", "Storage not available or read only");
+                return;
+            }
 
+            if (filename.contains(".xls")) {
 
-        Log.d("my","filename = "+filename);
+                try {
+                    Log.d("my", "myCell ++ xls");
+                    // Creating Input Stream
+                    // File file = FileLoader.getExcelFileFromSD(filename);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    File file = FileLoader.getExcelFileWithPathFromSD(filename);
+                    FileInputStream myInput = new FileInputStream(file);
+                    if (myInput == null) Log.d("my", "myInput is null");
+                    else Log.d("my", "myInput ok!");
 
-        if(filename==null){
-            Toast.makeText(AndroidReadExcelActivity.this, getString(R.string.cant_open_file),Toast.LENGTH_SHORT);
-            return;
-        }
+                    // Create a POIFSFileSystem object
+                    POIFSFileSystem myFileSystem = new POIFSFileSystem(myInput);
 
-        if (!FileLoader.isExternalStorageAvailable() || FileLoader.isExternalStorageReadOnly()) {
-            Log.w("FileUtils", "Storage not available or read only");
-            return;
-        }
+                    // Create a workbook using the File System
+                    HSSFWorkbook myWorkBook = new HSSFWorkbook(myFileSystem);
+                    Log.d("my", "getSheets =" + myWorkBook.getActiveSheetIndex());
 
-        if(filename.contains(".xls")){
+                    // Get the first sheet from workbook
+                    HSSFSheet mySheet = myWorkBook.getSheetAt(0);
 
-        try {
-            Log.d("my", "myCell ++ xls");
-            // Creating Input Stream
-            // File file = FileLoader.getExcelFileFromSD(filename);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            File file = FileLoader.getExcelFileWithPathFromSD(filename);
-            FileInputStream myInput = new FileInputStream(file);
-            if (myInput == null) Log.d("my", "myInput is null");
-            else Log.d("my", "myInput ok!");
+                    /** We now need something to iterate through the cells.**/
+                    Iterator<Row> rowIter = mySheet.rowIterator();
 
-            // Create a POIFSFileSystem object
-            POIFSFileSystem myFileSystem = new POIFSFileSystem(myInput);
+                    //int n_id
 
-            // Create a workbook using the File System
-            HSSFWorkbook myWorkBook = new HSSFWorkbook(myFileSystem);
-            Log.d("my", "getSheets =" + myWorkBook.getActiveSheetIndex());
-
-            // Get the first sheet from workbook
-            HSSFSheet mySheet = myWorkBook.getSheetAt(0);
-
-            /** We now need something to iterate through the cells.**/
-            Iterator<Row> rowIter = mySheet.rowIterator();
-
-            //int n_id
-
-            MainApplication.dbHelper.clear_AC_GOODS_CNT();
-            MainApplication.dbHelper.clearDic_Goods();
-            MainApplication.dbHelper.clearDic_Goods_GRP();
+                    MainApplication.dbHelper.clear_AC_GOODS_CNT();
+                    MainApplication.dbHelper.clearDic_Goods();
+                    MainApplication.dbHelper.clearDic_Goods_GRP();
 
 
-            int iid = 0;
-            while (rowIter.hasNext()) {
-                HSSFRow myRow = (HSSFRow) rowIter.next();
-                int num = myRow.getRowNum();
+                    int iid = 0;
+                    while (rowIter.hasNext()) {
+                        HSSFRow myRow = (HSSFRow) rowIter.next();
+                        int num = myRow.getRowNum();
 
-                int cnt = myRow.getLastCellNum();
-                Log.d("my", " num =" + num + " last = " + cnt);
-                String id = "";
-                String name = "";
-                String article = "";
-                String unit = "";
-                String barcode = "";
+                        int cnt = myRow.getLastCellNum();
+                        Log.d("my", " num =" + num + " last = " + cnt);
+                        String id = "";
+                        String name = "";
+                        String article = "";
+                        String unit = "";
+                        String barcode = "";
 
 
-                Iterator<Cell> cellIter = myRow.cellIterator();
-                while (cellIter.hasNext()) {
-                    HSSFCell myCell = (HSSFCell) cellIter.next();
-                    int index = myCell.getColumnIndex();
-                  //  Log.d("my", "myCell = " + myCell + " column = " + index);
+                        Iterator<Cell> cellIter = myRow.cellIterator();
+                        while (cellIter.hasNext()) {
+                            HSSFCell myCell = (HSSFCell) cellIter.next();
+                            int index = myCell.getColumnIndex();
+                            //  Log.d("my", "myCell = " + myCell + " column = " + index);
 
-                    switch (index) {
-                        case 0:
-                            id = myCell.toString();
-                            break;
-                        case 1:
-                            name = myCell.toString();
-                            break;
-                        case 2:
-                            article = myCell.toString();
-                            break;
-                        case 3:
-                            unit = myCell.toString();
-                            break;
-                        case 4:
+                            switch (index) {
+                                case 0:
+                                    id = myCell.toString();
+                                    break;
+                                case 1:
+                                    name = myCell.toString();
+                                    break;
+                                case 2:
+                                    article = myCell.toString();
+                                    break;
+                                case 3:
+                                    unit = myCell.toString();
+                                    break;
+                                case 4:
 
-                            barcode = myCell.toString();
-                            try {
-                                double bc = Double.parseDouble(barcode);
-                                int bb = (int) bc;
-                                barcode = Integer.toString(bb);
-                            } catch (Exception e) {
+                                    barcode = myCell.toString();
+                                    try {
+                                        double bc = Double.parseDouble(barcode);
+                                        int bb = (int) bc;
+                                        barcode = Integer.toString(bb);
+                                    } catch (Exception e) {
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-
-                if (num > 0) {
-                    Log.d("my", ">>>>>" + name + " ");
-                    if (barcode.length() > 0 && article.length() == 0) {
-                        article = barcode;
-                    }
-
-                    if (name.length() > 0 && article.length() > 0 && unit.length() > 0 && id.length() > 0) {
-
-
-
-                        if (name.contains("'")) {
-                            name = name.replaceAll("'", "\''");
-                            Log.d("my", "replacer: " + name);
                         }
 
+                        if (num > 0) {
+                            Log.d("my", ">>>>>" + name + " ");
+                            if (barcode.length() > 0 && article.length() == 0) {
+                                article = barcode;
+                            }
 
-                        Good good = new Good(iid, 0, name, unit, article);
-                        ArrayList<String> barcs = new ArrayList<>();
-                        barcs.add(barcode);
-                        good.setBarcodes(barcs);
+                            if (name.length() > 0 && article.length() > 0 && unit.length() > 0 && id.length() > 0) {
 
-                        Log.d("my", "***************good: " + good.toString());
-                        goodsList.add(good);
-                        iid = MainApplication.dbHelper.getMaxGoodId()+1;
-                        MainApplication.dbHelper.writeGood(iid, 0, name, article, unit, barcode, 0);
+
+                                if (name.contains("'")) {
+                                    name = name.replaceAll("'", "\''");
+                                    Log.d("my", "replacer: " + name);
+                                }
+
+
+                                Good good = new Good(iid, 0, name, unit, article);
+                                ArrayList<String> barcs = new ArrayList<>();
+                                barcs.add(barcode);
+                                good.setBarcodes(barcs);
+
+                                Log.d("my", "***************good: " + good.toString());
+                                goodsList.add(good);
+                                iid = MainApplication.dbHelper.getMaxGoodId() + 1;
+                                MainApplication.dbHelper.writeGood(iid, 0, name, article, unit, barcode, 0);
+                            }
+                        }
+
+                        iid++;
+
                     }
-                }
+                    MainApplication.dbHelper.writeGoodGRP(0, 0, "Excel");
 
-                iid++;
 
-            }
-            MainApplication.dbHelper.writeGoodGRP(0,0,"Excel");
-
-             importGoodsListAdapter = new ImportGoodsListAdapter<>(AndroidReadExcelActivity.this, R.layout.row_excel_good, goodsList);
-             setListAdapter(importGoodsListAdapter);
-            countOfGoods.setText("" + goodsList.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d("my","err open="+e.toString());
-
-            AlertDialog alertDialog = new AlertDialog.Builder(AndroidReadExcelActivity.this).create();
-            alertDialog.setTitle(getString(R.string.error));
-            alertDialog.setMessage(getString(R.string.cant_open_file));
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                    updateAdapterH.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            importGoodsListAdapter = new ImportGoodsListAdapter<>(AndroidReadExcelActivity.this, R.layout.row_excel_good, goodsList);
+                            setListAdapter(importGoodsListAdapter);
+                            countOfGoods.setText("" + goodsList.size());
+                            pd.hide();
                         }
                     });
-            alertDialog.show();
 
-        }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d("my", "err open=" + e.toString());
+
+                   /* readExcelFileHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog alertDialog = new AlertDialog.Builder(AndroidReadExcelActivity.this).create();
+                            alertDialog.setTitle(getString(R.string.error));
+                            alertDialog.setMessage(getString(R.string.cant_open_file));
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
+                    });*/
+
+
+
+                }
 ////////////////////////////////////////////////////////////////////////
 
+            }
+            if (filename.contains(".csv")) {
+                Log.d("my", "import csv");
+
+                readCsv(AndroidReadExcelActivity.this, filename);
+
+                // String filename = "C:\Book.csv";
+
+
+                System.out.println("Starting to parse CSV file using opencsv");
+                parseUsingOpenCSV(filename);
+
+            }
+
+
+            return;
         }
-        if(filename.contains(".csv"))
-        {
-        Log.d("my","import csv");
-
-            readCsv(AndroidReadExcelActivity.this,filename);
-
-           // String filename = "C:\Book.csv";
-
-
-            System.out.println("Starting to parse CSV file using opencsv");
-            parseUsingOpenCSV(filename);
-
-        }
-
-
-        return;
     }
+
+    Handler updateAdapterH= new Handler();
 
 
     private void parseUsingOpenCSV(String filename)
@@ -524,28 +473,6 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
     }
 
 
-        /*AssetManager assetManager = context.getAssets();
-
-        try {
-            Log.d("my","import csv ok = ");
-            InputStream csvStream = assetManager.open("content://com.estrongs.files/storage/sdcard0/BarcodeScanner/csvdocument.csv");//CSV_PATH);
-            InputStreamReader csvStreamReader = new InputStreamReader(csvStream);
-            CSVReader csvReader = new CSVReader(csvStreamReader);
-            String[] line;
-
-            // throw away the header
-            csvReader.readNext();
-
-            while ((line = csvReader.readNext()) != null) {
-                questionList.add(line);
-            }
-        } catch (IOException e) {
-            Log.d("my","import csv err = "+e.toString());
-            e.printStackTrace();
-        }
-
-        Log.d("my","List csv = "+questionList.toString());*/
-
         return questionList;
     }
 
@@ -593,21 +520,6 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
         }
 
 
-
-
-       /* Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        //intent.setType("*//*");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select a File to Upload"),
-                    FILE_SELECT_CODE);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // Potentially direct the user to the Market with a Dialog
-            Toast.makeText(this, "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     String chooseFilepath="";
@@ -633,7 +545,14 @@ public class AndroidReadExcelActivity extends ListActivity implements OnClickLis
                         h0.postAtTime(new Runnable() {
                             @Override
                             public void run() {
-                                readExcelFile(AndroidReadExcelActivity.this, chooseFilepath);
+                                pd = new ProgressDialog(AndroidReadExcelActivity.this);
+                                pd.setTitle("Waiting");
+                                pd.setMessage("Load goods...");
+                                pd.setCancelable(false);
+                                pd.show();
+                                ReadEXLfile readEXLfile = new ReadEXLfile(chooseFilepath);
+                                readEXLfile.start();
+
                             }
                         },500);
 

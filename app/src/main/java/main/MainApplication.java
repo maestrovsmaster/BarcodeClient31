@@ -3,12 +3,14 @@ package main;
 import android.app.Application;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
 import adapter.DatabaseHelper;
+import scanworkingactivity.ScanSettingsActivity;
 import start.WellcomeActivity2;
 import startactivity.MainActivity;
 
@@ -26,12 +28,16 @@ public class MainApplication extends Application {
     public static String CAMERA_ON="CAMERA_ON";
     public static String CAMERA_OFF="CAMERA_OFF";
     public static int UPDATE_STATE = 18;
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
 
+        prefs = getSharedPreferences("com.app.barcodeclient3", MODE_PRIVATE);
+        int scanType = prefs.getInt(ScanSettingsActivity.scan_type, 1);
+        ScannerConstants.CURRENT_SCAN_MODE=scanType;
 
         readyDBHandler = new ReadyDBHandler();
         LoadDBThread loadDBThread = new LoadDBThread();

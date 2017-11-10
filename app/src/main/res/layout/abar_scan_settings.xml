@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
 
-    android:layout_height="48dp"
-    android:background="@color/indigo_600"
+    android:layout_height="56dp"
+    android:background="@color/indigo_50"
+
     >
 
     <ImageButton
@@ -54,7 +55,8 @@
         android:background="@drawable/transparent_nobord_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:tint="@color/ash"/>
 
 
     <ImageButton
@@ -68,6 +70,7 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_search_white_36dp"
         android:layout_marginLeft="2dp"
+        android:tint="@color/ash"
         android:alpha=".7"
         android:visibility="visible"
         android:background="@drawable/transparent_nobord_button" />
@@ -91,11 +94,12 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:hint="@string/name_or_barc"
-        android:textColorHint="@color/indigo_100_a50"
+        android:textColorHint="@color/ash"
         android:paddingRight="4dp"
         android:paddingLeft="4dp"
         android:background="@color/white_alph20"
         android:textColor="@color/dark_gray"
-        android:layout_margin="4dp" />
+        android:layout_margin="4dp"
+        />
 
 </RelativeLayout>

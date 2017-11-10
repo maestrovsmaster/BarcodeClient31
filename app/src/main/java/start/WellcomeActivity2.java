@@ -3,7 +3,9 @@ package start;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,9 +28,12 @@ public class WellcomeActivity2 extends AppCompatActivity {
 
 
 
+    private ViewPager mViewPager;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+
     FrameLayout frameLayout =null;
 
-    static WellcomeFragment0 wellcomeFragment0;
+
     private final static  int MAX_FRAGMENTS = 4;
 
     Button buttonNext=null;
@@ -38,6 +43,10 @@ public class WellcomeActivity2 extends AppCompatActivity {
 
     private boolean next=true;
 
+    WellcomeFragment0 wellcomeFragment0;
+    BluetoothFragment4 bluetoothFragment4;
+    PortableTerminalFragment12 portableTerminalFragment12;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +55,10 @@ public class WellcomeActivity2 extends AppCompatActivity {
 
 
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
+       /* ActionBar mainActionBar = getSupportActionBar();
+        if (mainActionBar != null) {
+            mainActionBar.hide();
+        }*/
 
         buttonNext = (Button)findViewById(R.id.buttonNext);
         buttonBack = (Button) findViewById(R.id.buttonBack);
@@ -60,7 +69,7 @@ public class WellcomeActivity2 extends AppCompatActivity {
                 if(currentPosition <MAX_FRAGMENTS) currentPosition +=1;
                 else finish();
                 next=true;
-                jumpFragment();
+
             }
         });
 
@@ -69,114 +78,68 @@ public class WellcomeActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 if(currentPosition >0) currentPosition -=1;
                 next=false;
-                jumpFragment();
+
             }
         });
 
         buttonBack.setVisibility(View.GONE);
 
+        mViewPager = (ViewPager) findViewById(R.id.container);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
         //frameLayout = (FrameLayout)findViewById(R.id.set_frame_container);
 
         if(wellcomeFragment0==null) wellcomeFragment0 = new WellcomeFragment0();
+        bluetoothFragment4 = new BluetoothFragment4();
+        portableTerminalFragment12 = new PortableTerminalFragment12();
 
 
 
-        if (wellcomeFragment0 != null)
-            fragmentManager.beginTransaction()
-                    .replace(R.id.set_frame_container, wellcomeFragment0).commit();
 
-        // wellcomeFragment0.setEmailEditListener(editEmailListener);
     }
 
 
     public static boolean autonom = true;
 
 
-    private void jumpFragment()
-    {
-        Log.d("my", "fgagment # " + currentPosition);
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-       // if(next) ft.setCustomAnimations(R.anim.left_input, R.anim.left_exit);
-       // else ft.setCustomAnimations(R.anim.rigth_input, R.anim.rigth_exit);
-
-        switch (currentPosition)
-        {
-            case 0:
-
-                ft.replace(R.id.set_frame_container, wellcomeFragment0, "detailFragment");
-                ft.commit();
-                buttonBack.setVisibility(View.GONE);
-            break;
-
-            case 1:
-                if(autonom){
-
-                    MainActivity.OFFLINE_MODE=true;
-                    MainApplication.dbHelper.insertOrReplaceOption("OFFLINE_MODE","1");
-
-                    WellcomeFragment12 newFragment = new WellcomeFragment12();
-                    ft.replace(R.id.set_frame_container, newFragment, "detailFragment");
-                    ft.commit();
-                    buttonBack.setVisibility(View.VISIBLE);
-                    break;
-
-                }else {
-
-                    MainActivity.OFFLINE_MODE=false;
-                    MainApplication.dbHelper.insertOrReplaceOption("OFFLINE_MODE","0");
-
-                    WellcomeFragment1 newFragment = new WellcomeFragment1();
-                    ft.replace(R.id.set_frame_container, newFragment, "detailFragment");
-                    ft.commit();
-                    buttonBack.setVisibility(View.VISIBLE);
-                    break;
-                }
-
-            case 2:
-                if(autonom){
-                    WellcomeFragment4 newFragment4 = new WellcomeFragment4();
-                    ft.replace(R.id.set_frame_container, newFragment4, "detailFragment");
-                    ft.commit();
-                    buttonBack.setVisibility(View.VISIBLE);
-                    buttonNext.setText(getResources().getText(R.string.ready));
-                    break;
-                }else {
-                    WellcomeFragment2 newFragment2 = new WellcomeFragment2();
-                    ft.replace(R.id.set_frame_container, newFragment2, "detailFragment");
-                    ft.commit();
-                    buttonBack.setVisibility(View.VISIBLE);
-                    break;
-                }
-
-            case 3:
-                if(autonom){
-                    finish();
-                }else {
-                    WellcomeFragment3 newFragment3 = new WellcomeFragment3();
-                    ft.replace(R.id.set_frame_container, newFragment3, "detailFragment");
-                    ft.commit();
-                    buttonBack.setVisibility(View.VISIBLE);
-                    buttonNext.setText(getResources().getText(R.string.next));
-                    break;
-                }
-
-            case 4:
-                WellcomeFragment4 newFragment4 = new WellcomeFragment4();
-                ft.replace(R.id.set_frame_container, newFragment4, "detailFragment");
-                ft.commit();
-                buttonBack.setVisibility(View.VISIBLE);
-                buttonNext.setText(getResources().getText(R.string.ready));
-                break;
 
 
-            default:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.set_frame_container, wellcomeFragment0).commit();
-                break;
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(android.support.v4.app.FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a ZalFragment (defined as a static inner class below).
+           switch (position) {
+               case 0:
+                   return wellcomeFragment0;
+               case 1:
+                   return portableTerminalFragment12;
+               case 2:
+                   return bluetoothFragment4;
+
+               default:
+                   return wellcomeFragment0;
+           }
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "";
         }
     }
-
-
 
 
 

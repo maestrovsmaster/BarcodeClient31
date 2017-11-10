@@ -1,9 +1,8 @@
 package newmainscanner;
 
-import android.app.ActionBar;
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -12,11 +11,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
+//import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -42,6 +47,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+//import android.widget.Toolbar;
 
 import com.app.barcodeclient3.R;
 import com.google.zxing.ResultPoint;
@@ -79,7 +85,7 @@ import startactivity.MainActivity;
 /**
  * Custom Scannner Activity extending from Activity to display a custom layout form scanner view.
  */
-public class NewScannerActivity extends ListActivity implements
+public class NewScannerActivity extends AppCompatActivity implements
         DecoratedBarcodeView.TorchListener {
 
    // private CaptureManager capture;
@@ -112,6 +118,8 @@ public class NewScannerActivity extends ListActivity implements
     ImageButton closeButton;
     TextView abarTitle;
     ImageView offlineIcon;
+
+    ListView list;
 
 
     EditText searchEditText;
@@ -164,7 +172,7 @@ public class NewScannerActivity extends ListActivity implements
     NumberPicker numberPicker;
 
 
-    private ActionBar mainActionBar;
+   // private ActionBar mainActionBar;
 
     boolean notCreateGood = false;
 
@@ -183,9 +191,12 @@ public class NewScannerActivity extends ListActivity implements
 
     Good currentGood = null;
 
+    public static android.support.v7.app.ActionBar mainActionBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_new_scanner);
@@ -225,12 +236,7 @@ public class NewScannerActivity extends ListActivity implements
                 }
                 else{
                     v.setTag("0");
-                    hideCameraButton.setImageResource(R.drawable.ic_close_white_36dp);
-                    barcodeScannerView.setVisibility(View.VISIBLE);
-                    switchFlashlightButton.setVisibility(View.VISIBLE);
-                    //capture.onResume();
-                    barcodeScannerView.resume();
-                    MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_ON);
+                    startCamera();
                 }
             }
         });
@@ -278,10 +284,27 @@ public class NewScannerActivity extends ListActivity implements
         mDrawerList.setAdapter(menuAdapter);///////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-        mainActionBar = getActionBar(); //main bar
+       /* mainActionBar = getActionBar(); //main bar
         mainActionBar.setDisplayShowCustomEnabled(true);
         mainActionBar.setDisplayShowHomeEnabled(false);
+        mainActionBar.setCustomView(R.layout.abar_scan_settings);*/
+
+
+
+
+
+
+        mainActionBar = getSupportActionBar();
+        mainActionBar.setDisplayOptions(getSupportActionBar().getDisplayOptions() | android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        mainActionBar.setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+
         mainActionBar.setCustomView(R.layout.abar_scan_settings);
+        View abarView = mainActionBar.getCustomView();
+        final Toolbar parent = (Toolbar) abarView.getParent();
+        parent.setPadding(0, 0, 0, 0);//for tab otherwise give space in tab
+        parent.setContentInsetsAbsolute(0, 0);
+
+
         closeButton = (ImageButton) mainActionBar.getCustomView().findViewById(R.id.closeButton);
         abarTitle = (TextView) mainActionBar.getCustomView().findViewById(R.id.abarTitle);
         TextView offlineTW = (TextView) mainActionBar.getCustomView().findViewById(R.id.offlineIcon);
@@ -353,6 +376,8 @@ public class NewScannerActivity extends ListActivity implements
             abarTitle.setText(R.string.bill_in);
         }
 
+        list = (ListView) findViewById(R.id.list);
+
         searchEditText = (EditText) mainActionBar.getCustomView().findViewById(R.id.searchEditText);
         searchBt = (ImageButton) mainActionBar.getCustomView().findViewById(R.id.searchBt);
         listRelLayout = (RelativeLayout) findViewById(R.id.listRelLayout);
@@ -416,8 +441,8 @@ public class NewScannerActivity extends ListActivity implements
 
         cameraButton1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                IntentIntegrator scanIntegrator = new IntentIntegrator(NewScannerActivity.this);
-                scanIntegrator.initiateScan();
+                Log.d("my","cameraButton click");
+              // startCamera();
             }
         });
         keyBoardButton1.setFocusable(false);
@@ -498,14 +523,68 @@ public class NewScannerActivity extends ListActivity implements
 
         adapter = new GoodsListAdapter<Good>(NewScannerActivity.this,
                 R.layout.adapter_good_row, goodList, id);
-        setListAdapter(adapter);
+        list.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
         ThreadScanSettings threadScanSettings = new ThreadScanSettings();
         threadScanSettings.start();
 
-        super.onCreate(savedInstanceState);
+
     }
+
+    private void startCamera() {
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Log.d("my","get gallery android 6+");
+
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                Log.d("my","get gallery no granted");
+                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 0);
+            }else{
+                Log.d("my","get gallery granted!");
+                //takePicture();
+                startCameraIntegrator();
+
+            }
+        }else{
+            Log.d("my","get gallery android 4,5");
+            //takePicture();
+            startCameraIntegrator();
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @android.support.annotation.NonNull final String[] permissions, @android.support.annotation.NonNull final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d("my","permissions = "+permissions[0]);
+
+
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                //takePicture();
+                if(permissions[0].equals(Manifest.permission.CAMERA)) startCameraIntegrator();
+                if(permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) exportInvToXLS1();
+
+            }
+        }
+    }
+
+
+    private void startCameraIntegrator(){
+
+        hideCameraButton.setImageResource(R.drawable.ic_close_white_36dp);
+        barcodeScannerView.setVisibility(View.VISIBLE);
+        switchFlashlightButton.setVisibility(View.VISIBLE);
+        //capture.onResume();
+        barcodeScannerView.resume();
+        MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_ON);
+    }
+
 
     ArrayList<Good> accGoods = new ArrayList<>();
 
@@ -807,7 +886,7 @@ public class NewScannerActivity extends ListActivity implements
                                         Log.d("my", "222");
                                         adapter.setGoodClickListener(goodClickListener);
                                         adapter.notifyDataSetChanged();
-                                        setListAdapter(adapter);
+                                        list.setAdapter(adapter);
                                         adapter.notifyDataSetChanged();/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHeck it !!!!
                                         showGoodsList(true);
                                         adapter.notifyDataSetChanged();/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHeck it !!!!
@@ -1797,6 +1876,7 @@ public class NewScannerActivity extends ListActivity implements
 
             view.findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
+                    Log.d("my","select settings...");
                     Intent intent = new Intent(NewScannerActivity.this, ScanSettingsActivity.class);
                     startActivityForResult(intent, 0);
                     closeDriver();
@@ -1900,6 +1980,31 @@ public class NewScannerActivity extends ListActivity implements
     static String filename="";
 
     private void exportInvToXLS() {
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            // Here, thisActivity is the current activity
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+
+
+            } else { //permission is automatically granted on sdk<23 upon installation
+                Log.d("my", "Permission is granted");
+                exportInvToXLS1();
+
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.d("my", "Permission is granted");
+            exportInvToXLS1();
+
+        }
+    }
+
+
+
+    private void exportInvToXLS1() {
         //Intent intent = new Intent(ScanWorkingActivity.this, ScanSettingsActivity.class);
         //startActivityForResult(intent, 0);
 

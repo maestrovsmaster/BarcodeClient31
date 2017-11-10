@@ -210,6 +210,7 @@
     <string name="turn_on_flashlight">Turn on Flashlight</string>
     <string name="turn_off_flashlight">Turn off Flashlight</string>
     <string name="back_to_invs_list">Back to inventories</string>
+    <string name="adding_of_new_good">Adding a new product</string>
 
 
 </resources>
