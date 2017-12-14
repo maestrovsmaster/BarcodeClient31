@@ -91,6 +91,8 @@ public class MainActivity extends Activity {
 
         device_id = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
 
+        Log.d("my", "Wellcome to "+MainActivity.this.getClass().toString() );
+
         Log.d("my", "Android id = " + device_id);
 
         device_name = getDeviceName();

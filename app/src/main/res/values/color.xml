@@ -40,8 +40,19 @@
     <color name="red_50">#80FF401A</color>
 
     <color name="transparent">#00FFFFFF</color>
-    
-    
+
+
+    <color name="primary">#9E9E9E</color>
+    <color name="primary_dark">#616161</color>
+    <color name="primary_light">#F5F5F5</color>
+    <color name="accent">#448AFF</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#212121</color>
+    <color name="divider">#BDBDBD</color>
+
+
+
     <color name="indigo_500">#3F51B5</color>
     <color name="indigo_50">#E8EAF6</color>
     <color name="indigo_100">#C5CAE9</color>

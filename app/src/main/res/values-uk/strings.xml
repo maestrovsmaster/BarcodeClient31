@@ -120,4 +120,5 @@
     <string name="turn_on_flashlight">Увімкнути ліхтарик</string>
     <string name="back_to_invs_list">Повернутися до списку переобліків</string>
     <string name="adding_of_new_good">Створення нового товару</string>
+    <string name="article_search">пошук за артикулом</string>
 </resources>

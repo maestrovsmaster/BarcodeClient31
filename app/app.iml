@@ -90,12 +90,9 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes-jar" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dependency-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
@@ -103,7 +100,6 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/lint" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/prebuild" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
@@ -120,22 +116,24 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="commons-logging:commons-logging:1.1.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-v4-23.1.1" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\MaestroVS\AndroidStudioProjects\BarcodeClient31\app\libs\jaybird-full-2.2.1.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="com.opencsv:opencsv:4.0@jar" level="project" />
     <orderEntry type="library" name="com.google.zxing:core:3.2.1@jar" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-text:1.1@jar" level="project" />
     <orderEntry type="library" name="com.mikepenz.iconics:library-0.7.3" level="project" />
     <orderEntry type="library" name="com.android.support:cardview-v7-23.2.0" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-23.1.1" level="project" />
     <orderEntry type="library" name="com.journeyapps:zxing-android-embedded-3.3.0" level="project" />
-    <orderEntry type="library" name="commons-collections:commons-collections:3.2.1@jar" level="project" />
     <orderEntry type="library" name="com.mikepenz.materialdrawer:library-0.9.5" level="project" />
     <orderEntry type="library" name="com.android.support:design-23.1.1" level="project" />
-    <orderEntry type="library" name="commons-beanutils:commons-beanutils:1.9.2@jar" level="project" />
-    <orderEntry type="library" name="__local_aars__:C.\Users\MaestroVS\AndroidStudioProjects\BarcodeClient31\app\libs\poi-3.7.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="com.opencsv:opencsv:3.8@jar" level="project" />
+    <orderEntry type="library" name="org.apache.poi:poi:3.7@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-annotations:23.1.1@jar" level="project" />
-    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.4@jar" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
+    <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
+    <orderEntry type="library" name="commons-beanutils:commons-beanutils:1.9.3@jar" level="project" />
+    <orderEntry type="library" name="commons-collections:commons-collections:3.2.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-23.1.1" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.6@jar" level="project" />
+    <orderEntry type="library" name="org.apache.http.legacy-android-23" level="project" />
   </component>
 </module>

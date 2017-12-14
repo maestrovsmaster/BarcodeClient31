@@ -36,6 +36,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -82,13 +83,15 @@ import scanworkingactivity.ScanSettingsActivity;
 import scanworkingactivity.TotalGoodsListActivity;
 import startactivity.MainActivity;
 
+import static main.ScannerConstants.CURRENT_SCAN_MODE;
+
 /**
  * Custom Scannner Activity extending from Activity to display a custom layout form scanner view.
  */
 public class NewScannerActivity extends AppCompatActivity implements
         DecoratedBarcodeView.TorchListener {
 
-   // private CaptureManager capture;
+    // private CaptureManager capture;
     private DecoratedBarcodeView barcodeScannerView;
     private ImageButton switchFlashlightButton;
     private ImageButton hideCameraButton;
@@ -99,7 +102,7 @@ public class NewScannerActivity extends AppCompatActivity implements
     private ActionBarDrawerToggle mDrawerToggle;
 
 
-    private int CURRENT_SCAN_MODE = ScannerConstants.CURRENT_SCAN_MODE;
+
 
     ArrayList<String> data = new ArrayList<>();
     ArrayAdapter<String> adapterDoc;
@@ -123,7 +126,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
 
     EditText searchEditText;
-   // EditText searchEditTextNew;
+    // EditText searchEditTextNew;
 
     ImageButton searchBt;
 
@@ -166,13 +169,15 @@ public class NewScannerActivity extends AppCompatActivity implements
     LinearLayout subRelLayout;
     ImageButton docListButton1;
     ImageButton keyBoardButton1;
-    ImageButton cameraButton1;
+
     ImageButton scansettingsButton;
+
+    CheckBox searchArticle;
 
     NumberPicker numberPicker;
 
 
-   // private ActionBar mainActionBar;
+    // private ActionBar mainActionBar;
 
     boolean notCreateGood = false;
 
@@ -194,6 +199,39 @@ public class NewScannerActivity extends AppCompatActivity implements
     public static android.support.v7.app.ActionBar mainActionBar;
 
 
+    Dialog dialog;
+
+    private void showCamera() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        View view = getLayoutInflater().inflate(R.layout.dialog_camera, null);
+        switchFlashlightButton = (ImageButton) view.findViewById(R.id.switch_flashlight);
+        switchFlashlightButton.setTag("0");
+        switchFlashlightButton.setImageResource(R.drawable.ic_highlight_white_36dp);
+        if (!hasFlash()) {
+            switchFlashlightButton.setVisibility(View.GONE);
+        }
+
+        barcodeScannerView = (DecoratedBarcodeView) view.findViewById(R.id.zxing_barcode_scanner);
+        barcodeScannerView.setTorchListener(this);
+        barcodeScannerView.decodeContinuous(callback);
+        barcodeScannerView.setVisibility(View.VISIBLE);
+        barcodeScannerView.resume();
+        barcodeScannerView.setStatusText("");
+
+        builder.setView(view);
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = builder.create();
+        dialog.show();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,20 +240,10 @@ public class NewScannerActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_new_scanner);
         Log.d("my", "hello book list");
 
-        barcodeScannerView = (DecoratedBarcodeView)findViewById(R.id.zxing_barcode_scanner);
-        barcodeScannerView.setTorchListener(this);
-        barcodeScannerView.decodeContinuous(callback);
-
-        switchFlashlightButton = (ImageButton)findViewById(R.id.switch_flashlight);
-        switchFlashlightButton.setTag("0");
-        switchFlashlightButton.setImageResource(R.drawable.ic_highlight_white_36dp);
-        barcodeScannerView.setVisibility(View.VISIBLE);
 
         // if the device does not have flashlight in its camera,
         // then remove the switch flashlight button...
-        if (!hasFlash()) {
-            switchFlashlightButton.setVisibility(View.GONE);
-        }
+        searchArticle = (CheckBox) findViewById(R.id.searchArticle);
 
 
         hideCameraButton = (ImageButton) findViewById(R.id.hide_camera);
@@ -224,17 +252,18 @@ public class NewScannerActivity extends AppCompatActivity implements
         hideCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((  (String)hideCameraButton.getTag() ).equals("0") ){
+               /* if((  (String)hideCameraButton.getTag() ).equals("0") ){
                     v.setTag("1");
                     hideCameraButton.setImageResource(R.drawable.ic_camera_alt_white_36dp);
-                    barcodeScannerView.setVisibility(View.GONE);
-                    switchFlashlightButton.setVisibility(View.INVISIBLE);
+                   // barcodeScannerView.setVisibility(View.GONE);
+                  //  switchFlashlightButton.setVisibility(View.INVISIBLE);
                     //capture.onPause();
                     barcodeScannerView.pause();
                     MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_OFF);
 
                 }
-                else{
+                else*/
+                {
                     v.setTag("0");
                     startCamera();
                 }
@@ -247,8 +276,6 @@ public class NewScannerActivity extends AppCompatActivity implements
         capture.decode();*/
 
 
-
-
         //setProgressBarIndeterminateVisibility(true);
 
         String value = MainApplication.dbHelper.getOption(MainActivity.not_ask_create_good);
@@ -258,8 +285,6 @@ public class NewScannerActivity extends AppCompatActivity implements
             if (value.equals("1")) notCreateGood = true;
             else notCreateGood = false;
         }
-
-
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -288,10 +313,6 @@ public class NewScannerActivity extends AppCompatActivity implements
         mainActionBar.setDisplayShowCustomEnabled(true);
         mainActionBar.setDisplayShowHomeEnabled(false);
         mainActionBar.setCustomView(R.layout.abar_scan_settings);*/
-
-
-
-
 
 
         mainActionBar = getSupportActionBar();
@@ -364,8 +385,8 @@ public class NewScannerActivity extends AppCompatActivity implements
             Log.d("my", " no id =((( ");
         }
 
-        Log.d("my","myId = "+id);
-        if(id==-1){
+        Log.d("my", "myId = " + id);
+        if (id == -1) {
             selectOrCreateDocument();
         }
 
@@ -425,7 +446,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         subRelLayout = (LinearLayout) findViewById(R.id.subRelLayout);
         docListButton1 = (ImageButton) findViewById(R.id.docListButton1);
         keyBoardButton1 = (ImageButton) findViewById(R.id.keyBoardButton1);
-        cameraButton1 = (ImageButton) findViewById(R.id.cameraButton1);
+
         scansettingsButton = (ImageButton) findViewById(R.id.scansettingsButton);
 
         exportProgress = (ProgressBar) findViewById(R.id.exportProgress);
@@ -439,12 +460,7 @@ public class NewScannerActivity extends AppCompatActivity implements
             }
         });
 
-        cameraButton1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("my","cameraButton click");
-              // startCamera();
-            }
-        });
+
         keyBoardButton1.setFocusable(false);
 
         scansettingsButton.setOnClickListener(new View.OnClickListener() {
@@ -479,6 +495,7 @@ public class NewScannerActivity extends AppCompatActivity implements
             @Override
             public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
                 int result = actionId & EditorInfo.IME_MASK_ACTION;
+                Log.d("my","CURRENT SCAN MODE = "+CURRENT_SCAN_MODE);
                 switch (result) {
                     case EditorInfo.IME_ACTION_DONE:
                         // done stuff
@@ -508,7 +525,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
 
 		  /*numberPicker =  (NumberPicker) findViewById(R.id.numberPicker);
-		  numberPicker.setMinValue(0);
+          numberPicker.setMinValue(0);
 		  numberPicker.setMaxValue(10);
 		  numberPicker.setWrapSelectorWheel(true);*/
 
@@ -535,23 +552,25 @@ public class NewScannerActivity extends AppCompatActivity implements
     private void startCamera() {
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Log.d("my","get gallery android 6+");
+            Log.d("my", "get gallery android 6+");
 
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
-                Log.d("my","get gallery no granted");
-                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, 0);
-            }else{
-                Log.d("my","get gallery granted!");
+                Log.d("my", "get gallery no granted");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
+            } else {
+                Log.d("my", "get gallery granted!");
                 //takePicture();
-                startCameraIntegrator();
+                //startCameraIntegrator();
+                showCamera();
 
             }
-        }else{
-            Log.d("my","get gallery android 4,5");
+        } else {
+            Log.d("my", "get gallery android 4,5");
             //takePicture();
-            startCameraIntegrator();
+            //startCameraIntegrator();
+            showCamera();
         }
 
 
@@ -560,22 +579,24 @@ public class NewScannerActivity extends AppCompatActivity implements
     @Override
     public void onRequestPermissionsResult(final int requestCode, @android.support.annotation.NonNull final String[] permissions, @android.support.annotation.NonNull final int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d("my","permissions = "+permissions[0]);
+        Log.d("my", "permissions = " + permissions[0]);
 
 
         if (requestCode == 0) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 //takePicture();
-                if(permissions[0].equals(Manifest.permission.CAMERA)) startCameraIntegrator();
-                if(permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) exportInvToXLS1();
+                if (permissions[0].equals(Manifest.permission.CAMERA))
+                    showCamera(); //startCameraIntegrator();
+                if (permissions[0].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    exportInvToXLS1();
 
             }
         }
     }
 
 
-    private void startCameraIntegrator(){
+    /*private void startCameraIntegrator(){
 
         hideCameraButton.setImageResource(R.drawable.ic_close_white_36dp);
         barcodeScannerView.setVisibility(View.VISIBLE);
@@ -583,7 +604,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         //capture.onResume();
         barcodeScannerView.resume();
         MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_ON);
-    }
+    }*/
 
 
     ArrayList<Good> accGoods = new ArrayList<>();
@@ -802,16 +823,26 @@ public class NewScannerActivity extends AppCompatActivity implements
         public void run() {
             RequestGoodsList requestServer = new RequestGoodsList();
             ArrayList<Good> goodsList = new ArrayList<>();
+            Log.d("my", "IS checked = " + searchArticle.isChecked());
             if (!MainActivity.OFFLINE_MODE) {
-                goodsList = requestServer.getGoodsListByBarcode(id, barcode, article, name);
+                if (!searchArticle.isChecked()) {
+                    goodsList = requestServer.getGoodsListByBarcode(id, barcode, article, name);
+                } else {
+                    goodsList = requestServer.getGoodsListByBarcode(id, "", article, "");
+                }
             }
             if (MainActivity.OFFLINE_MODE) {
-                goodsList = MainApplication.dbHelper.getGoodList(name, article, barcode, id);
+                if (!searchArticle.isChecked()) {
+                    goodsList = MainApplication.dbHelper.getGoodList(name, article, barcode, id);
+                } else {
+                    goodsList = MainApplication.dbHelper.getGoodList("", article, "", id);
+                }
             }
 
 
             goodList.clear();
             goodList.addAll(goodsList);
+            Log.d("my", "otpravili tovar");
             h.post(readyGoodsHandler);
         }
     }
@@ -1095,10 +1126,13 @@ public class NewScannerActivity extends AppCompatActivity implements
         }
     };
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+   /* public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+        Log.d("my","SCANNED!");
+        if(dialog!=null) dialog.dismiss();
 
 
         if (scanningResult != null) {
@@ -1110,7 +1144,7 @@ public class NewScannerActivity extends AppCompatActivity implements
             //formatTxt.setText("FORMAT: " + scanFormat);
             if (scanContent != null) {
 
-                Log.d("my", scanContent);
+                Log.d("my", "scanContent" + scanContent);
                 searchEditText.setText(scanContent);
 
 
@@ -1154,7 +1188,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
         Log.d("my", "activity result: requestCode =" + requestCode + " result Code = " + resultCode);
 
-    }
+    }*/
 
     View.OnClickListener goodsListListener = new View.OnClickListener() {
         @Override
@@ -1253,8 +1287,8 @@ public class NewScannerActivity extends AppCompatActivity implements
         @Override
         public void onClick(View view) {
             clearGoodInfo();
-            barcodeScannerView.resume();
-            barcodeScannerView.setStatusText("");
+            // barcodeScannerView.resume();
+            //barcodeScannerView.setStatusText("");
         }
     };
 
@@ -1263,8 +1297,8 @@ public class NewScannerActivity extends AppCompatActivity implements
         @Override
         public void onClick(View view) {
 
-            barcodeScannerView.resume();
-            barcodeScannerView.setStatusText("");
+            // barcodeScannerView.resume();
+            // barcodeScannerView.setStatusText("");
 
             sendInvDt();
         }
@@ -1876,7 +1910,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
             view.findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Log.d("my","select settings...");
+                    Log.d("my", "select settings...");
                     Intent intent = new Intent(NewScannerActivity.this, ScanSettingsActivity.class);
                     startActivityForResult(intent, 0);
                     closeDriver();
@@ -1977,7 +2011,7 @@ public class NewScannerActivity extends AppCompatActivity implements
     }
 
 
-    static String filename="";
+    static String filename = "";
 
     private void exportInvToXLS() {
 
@@ -2003,7 +2037,6 @@ public class NewScannerActivity extends AppCompatActivity implements
     }
 
 
-
     private void exportInvToXLS1() {
         //Intent intent = new Intent(ScanWorkingActivity.this, ScanSettingsActivity.class);
         //startActivityForResult(intent, 0);
@@ -2015,21 +2048,19 @@ public class NewScannerActivity extends AppCompatActivity implements
 // To dismiss the dialog
 
 
-
         //setProgressBarIndeterminateVisibility(true);
         closeDriver();
 
-        if(date==null) date="_";
-        if(subdiv==null) subdiv="market";
+        if (date == null) date = "_";
+        if (subdiv == null) subdiv = "market";
 
-        date = date.replaceAll(":","_");
-        date = date.replaceAll("/","-");
+        date = date.replaceAll(":", "_");
+        date = date.replaceAll("/", "-");
         int offl = subdiv.indexOf(" - offline");
-        if(offl>0) subdiv=subdiv.substring(0,offl);
+        if (offl > 0) subdiv = subdiv.substring(0, offl);
         //date=date.replaceAll("offline document","");
-        filename = "inv" + "_"+date+"_"+subdiv;
-        Log.d("my","filename = "+filename);
-
+        filename = "inv" + "_" + date + "_" + subdiv;
+        Log.d("my", "filename = " + filename);
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -2042,7 +2073,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         input.setSelectAllOnFocus(true);
 
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT );
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
 // Set up the buttons
@@ -2077,7 +2108,6 @@ public class NewScannerActivity extends AppCompatActivity implements
         builder.show();
 
 
-
     }
 
 
@@ -2085,22 +2115,22 @@ public class NewScannerActivity extends AppCompatActivity implements
 
     class ExportExcelThread extends Thread {
 
-        String type="xls";
+        String type = "xls";
 
-        ExportExcelThread(String type)
-        {
-            this.type=type;
+        ExportExcelThread(String type) {
+            this.type = type;
         }
 
         @Override
         public void run() {
             ArrayList<Good> goodsAccList = MainApplication.dbHelper.getALLGoodsCountListAcc(id);
-             //success = CreateExportFile.exportGoodsXLS(goodsAccList,filename, id);
+            //success = CreateExportFile.exportGoodsXLS(goodsAccList,filename, id);
 
 
-
-            if(type.contains("csv")) success = CreateExportFile.exportGoodsCSV(goodsAccList,filename+".csv", id);
-            if(type.contains("xls")) success = CreateExportFile.exportGoodsXLS(goodsAccList,filename+".xls", id);
+            if (type.contains("csv"))
+                success = CreateExportFile.exportGoodsCSV(goodsAccList, filename + ".csv", id);
+            if (type.contains("xls"))
+                success = CreateExportFile.exportGoodsXLS(goodsAccList, filename + ".xls", id);
 
             impH.post(new Runnable() {
                 @Override
@@ -2243,21 +2273,18 @@ public class NewScannerActivity extends AppCompatActivity implements
 
     public void onClickGoodDialog(String val, boolean notAskMore) {
         Log.d("my", "val = " + val);
-        barcodeScannerView.resume();
-        barcodeScannerView.setStatusText("");
+        //barcodeScannerView.resume();
+        // barcodeScannerView.setStatusText("");
         setGoodsByBarc(val, val, val);
         notCreateGood = notAskMore;
     }
 
     public void onClickGoodDialogCancel() {
 
-        barcodeScannerView.resume();
-        barcodeScannerView.setStatusText("");
+        // barcodeScannerView.resume();
+        // barcodeScannerView.setStatusText("");
 
     }
-
-
-
 
 
     ////////CAMERA = @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -2266,35 +2293,35 @@ public class NewScannerActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         //capture.onResume();
-        barcodeScannerView.resume();
+        // barcodeScannerView.resume();
 
         String state = MainApplication.dbHelper.getOption(MainApplication.CAMERA_STATE);
-        if(state!=null)
-        if(state.equals(MainApplication.CAMERA_OFF)) {
-            hideCameraButton.setTag("1");
-            hideCameraButton.setImageResource(R.drawable.ic_camera_alt_white_36dp);
-            barcodeScannerView.setVisibility(View.GONE);
-            switchFlashlightButton.setVisibility(View.INVISIBLE);
-            //capture.onPause();
-            barcodeScannerView.pause();
-            MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE,MainApplication.CAMERA_OFF);
-        }
+        if (state != null)
+            if (state.equals(MainApplication.CAMERA_OFF)) {
+                hideCameraButton.setTag("1");
+                hideCameraButton.setImageResource(R.drawable.ic_camera_alt_white_36dp);
+                // barcodeScannerView.setVisibility(View.GONE);
+                // switchFlashlightButton.setVisibility(View.INVISIBLE);
+                //capture.onPause();
+                // barcodeScannerView.pause();
+                MainApplication.dbHelper.insertOrReplaceOption(MainApplication.CAMERA_STATE, MainApplication.CAMERA_OFF);
+            }
     }
 
     @Override
     protected void onPause() {
-        Log.d("camr","onPause");
+        Log.d("camr", "onPause");
         super.onPause();
         //capture.onPause();
-        barcodeScannerView.pause();
+        //   barcodeScannerView.pause();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d("camr","kadfsasdf");
+        Log.d("camr", "kadfsasdf");
         super.onDestroy();
         //capture.onDestroy();
-        barcodeScannerView.pause();
+        //  barcodeScannerView.pause();
     }
 
     /*@Override
@@ -2312,24 +2339,26 @@ public class NewScannerActivity extends AppCompatActivity implements
 
 
     public void pause(View view) {
-        barcodeScannerView.pause();
+        //barcodeScannerView.pause();
     }
 
     public void resume(View view) {
-        barcodeScannerView.resume();
+        //  barcodeScannerView.resume();
     }
 
     public void triggerScan(View view) {
-        barcodeScannerView.decodeSingle(callback);
+
+        //barcodeScannerView.decodeSingle(callback);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
+        return false;//barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
     /**
      * Check if the device's camera has a Flashlight.
+     *
      * @return true if there is Flashlight, otherwise false.
      */
     private boolean hasFlash() {
@@ -2338,10 +2367,10 @@ public class NewScannerActivity extends AppCompatActivity implements
     }
 
     public void switchFlashlight(View view) {
-        if ((  (String)switchFlashlightButton.getTag() ).equals("0") ) {
-            barcodeScannerView.setTorchOn();
+        if (((String) switchFlashlightButton.getTag()).equals("0")) {
+            if (barcodeScannerView != null) barcodeScannerView.setTorchOn();
         } else {
-            barcodeScannerView.setTorchOff();
+            if (barcodeScannerView != null) barcodeScannerView.setTorchOff();
         }
     }
 
@@ -2362,19 +2391,20 @@ public class NewScannerActivity extends AppCompatActivity implements
     }
 
 
-
-
-
-
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
 
-                barcodeScannerView.pause();
-                barcodeScannerView.setStatusText(result.getText());
+                if (dialog != null) dialog.dismiss();
+                if(barcodeScannerView!=null) barcodeScannerView.pause();
+
+                //  barcodeScannerView.pause();
+                //  barcodeScannerView.setStatusText(result.getText());
                 String scanContent = result.getText();
                 Log.d("my", scanContent);
+                Log.d("my", "finish!!!");
+
                 searchEditText.setText(scanContent);
 
 
@@ -2393,12 +2423,9 @@ public class NewScannerActivity extends AppCompatActivity implements
             }
 
 
-
-
-
             //Added preview of scanned barcode
-           // ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
-           // imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
+            // ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
+            // imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
         }
 
         @Override
@@ -2411,151 +2438,143 @@ public class NewScannerActivity extends AppCompatActivity implements
     EditText idEditText;
     EditText nameEditText;
 
-    String createInvId="";
-    int crInvId=999000;
-    String createInvName="";
-    String currentDateTimeString="";
-    Handler createInvH=new Handler();
+    String createInvId = "";
+    int crInvId = 999000;
+    String createInvName = "";
+    String currentDateTimeString = "";
+    Handler createInvH = new Handler();
 
 
-    private void selectOrCreateDocument()
-    {
-        Log.d("my","selectOrCreateDocument");
+    private void selectOrCreateDocument() {
+        Log.d("my", "selectOrCreateDocument");
 
-         ArrayList<Inventory> invList = MainApplication.dbHelper.getInventoryList();
-         if(invList.size()==1){
+        ArrayList<Inventory> invList = MainApplication.dbHelper.getInventoryList();
+        if (invList.size() == 1) {
 
-             Inventory inv = invList.get(0);
-             id = inv.getId();
-             date= inv.getDatetime();
-             subdiv = inv.getSubdivision().getName();
-             docType = inv.getDocType();
+            Inventory inv = invList.get(0);
+            id = inv.getId();
+            date = inv.getDatetime();
+            subdiv = inv.getSubdivision().getName();
+            docType = inv.getDocType();
 
-             Toast.makeText(NewScannerActivity.this,"inv "+id+" "+subdiv,
-                     Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewScannerActivity.this, "inv " + id + " " + subdiv,
+                    Toast.LENGTH_SHORT).show();
 
-         }else{
-
+        } else {
 
 
+            // custom dialog
+            creadeInvDialog = new Dialog(this);
+            creadeInvDialog.setContentView(R.layout.new_inventory_dialog);
+            creadeInvDialog.setTitle(getString(R.string.create_inventory));
 
-             // custom dialog
-             creadeInvDialog = new Dialog(this);
-             creadeInvDialog.setContentView(R.layout.new_inventory_dialog);
-             creadeInvDialog.setTitle(getString(R.string.create_inventory));
+            // set the custom dialog components - text, image and button
+            idEditText = (EditText) creadeInvDialog.findViewById(R.id.idEditText);
+            nameEditText = (EditText) creadeInvDialog.findViewById(R.id.nameEditText);
 
-             // set the custom dialog components - text, image and button
-             idEditText = (EditText) creadeInvDialog.findViewById(R.id.idEditText);
-             nameEditText=(EditText) creadeInvDialog.findViewById(R.id.nameEditText);
+            Button cancelButton = (Button) creadeInvDialog.findViewById(R.id.cancelBt);
+            Button createButton = (Button) creadeInvDialog.findViewById(R.id.createBt);
 
-             Button cancelButton = (Button) creadeInvDialog.findViewById(R.id.cancelBt);
-             Button createButton = (Button) creadeInvDialog.findViewById(R.id.createBt);
-
-             //idEditText.setFocusable(false);
+            //idEditText.setFocusable(false);
 
 
-             nameEditText.setFocusable(true);
-             nameEditText.setSelectAllOnFocus(true);
-             if(invList.size()==0){
-                 idEditText.setText(""+1);
-                 nameEditText.setText("Market");
-                 cancelButton.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View v) {
-                         creadeInvDialog.dismiss();
-                     }
-                 });
-             }
-             else{
+            nameEditText.setFocusable(true);
+            nameEditText.setSelectAllOnFocus(true);
+            if (invList.size() == 0) {
+                idEditText.setText("" + 1);
+                nameEditText.setText("Market");
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        creadeInvDialog.dismiss();
+                    }
+                });
+            } else {
                 // int maxId = MainApplication.dbHelper.getMaxInventoryId()+1;
                 // Log.d("my","maxId = "+maxId);
-                 // idEditText.setText(""+maxId);
+                // idEditText.setText(""+maxId);
 
-                 Inventory inv = invList.get(invList.size()-1);
-                 id = inv.getId();
-                 date= inv.getDatetime();
-                 subdiv = inv.getSubdivision().getName();
-                 docType = inv.getDocType();
+                Inventory inv = invList.get(invList.size() - 1);
+                id = inv.getId();
+                date = inv.getDatetime();
+                subdiv = inv.getSubdivision().getName();
+                docType = inv.getDocType();
 
-                 idEditText.setText(""+id);
-                 nameEditText.setText(subdiv);
+                idEditText.setText("" + id);
+                nameEditText.setText(subdiv);
 
-                 createButton.setText("OK");
-                 cancelButton.setText(R.string.inventory_list);
+                createButton.setText("OK");
+                cancelButton.setText(R.string.inventory_list);
 
-                 cancelButton.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View v) {
-
-
-                         Intent intent = new Intent(NewScannerActivity.this,
-                                 DockListActivity.class);
-                         Bundle b = new Bundle();
-                         b.putInt("type", ScannerConstants.INVENTORY);
-                         intent.putExtras(b);
-                         startActivity(intent);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
 
-                         finish();
-                     }
-                 });
-             }
+                        Intent intent = new Intent(NewScannerActivity.this,
+                                DockListActivity.class);
+                        Bundle b = new Bundle();
+                        b.putInt("type", ScannerConstants.INVENTORY);
+                        intent.putExtras(b);
+                        startActivity(intent);
 
 
+                        finish();
+                    }
+                });
+            }
 
 
+            createButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //create inventory...
+                    //dialog.dismiss();
+
+                    createInvId = idEditText.getText().toString();
+                    createInvName = nameEditText.getText().toString();
+
+                    createInvName += " - offline document";
+                    //currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                    DateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
+                    dateFormatter.setLenient(false);
+                    java.util.Date today = new java.util.Date();
+                    currentDateTimeString = dateFormatter.format(today);
 
 
-             createButton.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     //create inventory...
-                     //dialog.dismiss();
-
-                     createInvId=idEditText.getText().toString();
-                     createInvName=nameEditText.getText().toString();
-
-                     createInvName+=" - offline document";
-                     //currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                     DateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
-                     dateFormatter.setLenient(false);
-                     java.util.Date today = new java.util.Date();
-                     currentDateTimeString = dateFormatter.format(today);
+                    try {
+                        crInvId = Integer.parseInt(createInvId);
+                    } catch (Exception e) {
+                    }
 
 
-                     try{
-                         crInvId=Integer.parseInt(createInvId);
-                     }catch (Exception e){}
+                    if (createInvId.length() > 0)
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                MainApplication.dbHelper.insertInventoryDoc(crInvId, createInvId, currentDateTimeString, createInvName, docType);
+                                createInvH.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        id = crInvId;
+                                        date = currentDateTimeString;
+                                        subdiv = createInvName;
 
+                                        creadeInvDialog.dismiss();
 
-                     if(createInvId.length()>0)
-                         new Thread( ){
-                             @Override
-                             public void run() {
-                                 MainApplication.dbHelper.insertInventoryDoc(crInvId, createInvId, currentDateTimeString,createInvName , docType);
-                                 createInvH.post(new Runnable() {
-                                     @Override
-                                     public void run() {
-                                         id=crInvId;
-                                         date = currentDateTimeString;
-                                         subdiv = createInvName;
-
-                                         creadeInvDialog.dismiss();
-
-                                         Toast.makeText(NewScannerActivity.this,"inv "+id+" "+subdiv,
-                                                 Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(NewScannerActivity.this, "inv " + id + " " + subdiv,
+                                                Toast.LENGTH_SHORT).show();
                                         // loadDocListOffline();
-                                     }
-                                 });
-                             }
-                         }.start();
-                 }
-             });
+                                    }
+                                });
+                            }
+                        }.start();
+                }
+            });
 
-             creadeInvDialog.show();
-         }
+            creadeInvDialog.show();
+        }
     }
-
 
 
 }

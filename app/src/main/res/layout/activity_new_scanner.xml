@@ -20,24 +20,19 @@
         android:id="@+id/searcRelLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="92dp"
-        android:background="@android:color/black">
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
 
-        <com.journeyapps.barcodescanner.DecoratedBarcodeView
-            android:id="@+id/zxing_barcode_scanner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:zxing_scanner_layout="@layout/custom_barcode_scanner">
-        </com.journeyapps.barcodescanner.DecoratedBarcodeView>
+        >
 
-        <ImageButton
-            android:id="@+id/switch_flashlight"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:onClick="switchFlashlight"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        <CheckBox
+            android:id="@+id/searchArticle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/article_search"
+            android:layout_marginTop="12dp"/>
+
+
 
         <ImageButton
             android:id="@+id/hide_camera"
@@ -46,73 +41,14 @@
             android:onClick="switchFlashlight"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+
              />
 
 
-        <EditText
-            android:id="@+id/searchEditTextOld"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentTop="true"
-
-            android:ems="10"
-            android:layout_toLeftOf="@+id/searchBt"
-            android:gravity="center_vertical"
-            android:drawableRight="@drawable/close_32"
-            android:lines="1"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:layout_toRightOf="@+id/switch_flashlight"
-            android:drawablePadding="4dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:hint="@string/name_or_barc"
-            android:textColorHint="@color/indigo_100_a50"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
-            android:visibility="gone">
-
-            <requestFocus />
-        </EditText>
-
-        <ImageButton
-        android:id="@+id/searchBtOld"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="true"
-            android:textColor="@color/white"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_search_white_36dp"
-        android:layout_marginLeft="2dp"
-            android:alpha=".7"
-            android:visibility="gone" />
-
-        <ImageButton
-        android:id="@+id/cameraButton1"
-        android:layout_width="52dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/indigo_blue_button"
-        android:src="@drawable/ic_camera_alt_white_36dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="2dp"
-        android:visibility="gone"
-            android:alpha=".7" />
-
-        <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-
-        android:gravity="center_vertical"
-        android:layout_margin="6dp"
-            android:visibility="gone">
 
 
-        </RelativeLayout>
+
+
 
     </RelativeLayout>
 
@@ -470,24 +406,24 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
         android:id="@+id/cntRelLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
         android:layout_below="@+id/goodDetailsRelLayout"
-        android:paddingBottom="4dp"
+        android:layout_marginBottom="6dp"
         android:padding="6dp"
-        android:layout_marginBottom="6dp">
+        android:paddingBottom="4dp">
 
         <TextView
+            android:id="@+id/fctLb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Cnt"
-            android:id="@+id/fctLb"
             android:layout_alignBottom="@+id/plusButton"
             android:layout_alignTop="@+id/goodsCnt"
             android:gravity="left|center_vertical"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
+            android:text="@string/Cnt"
             android:textSize="22dp" />
 
         <TextView
@@ -495,30 +431,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="22sp"
+            android:layout_alignBottom="@+id/plusButton"
+            android:layout_alignTop="@+id/goodsCnt"
             android:layout_toRightOf="@+id/fctLb"
             android:editable="false"
             android:enabled="false"
-            android:layout_alignBottom="@+id/plusButton"
-            android:layout_alignTop="@+id/goodsCnt"
-            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:minWidth="20dp"
             android:paddingLeft="2dp"
             android:textColor="@color/dark_gray"
-            android:minWidth="20dp"
-            android:gravity="center_vertical" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/plusTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/plusTextView"
-            android:layout_toRightOf="@+id/factCnt"
-            android:textSize="20sp"
             android:layout_alignBottom="@+id/goodsCnt"
             android:layout_alignTop="@+id/goodsCnt"
+            android:layout_toRightOf="@+id/factCnt"
             android:gravity="center_vertical|center"
-            android:textColor="@color/dark_gray"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
+            android:textColor="@color/dark_gray"
+            android:textSize="20sp"
             android:textStyle="italic" />
 
         <EditText
@@ -527,61 +463,57 @@
             android:layout_height="match_parent"
 
 
-            android:textSize="26sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@+id/plusButton"
+            android:layout_toRightOf="@+id/minusButton"
+            android:background="@drawable/indigo_white"
+            android:drawablePadding="10dp"
             android:drawableRight="@drawable/ic_backspace_grey600_36dp"
-            android:maxLines="1"
+            android:gravity="center_vertical|right"
             android:inputType="numberDecimal"
             android:lines="1"
-            android:singleLine="true"
-            android:gravity="center_vertical|right"
-            android:layout_toRightOf="@+id/minusButton"
-            android:layout_marginLeft="4dp"
-            android:layout_toLeftOf="@+id/plusButton"
-            android:background="@drawable/indigo_white"
+            android:maxLines="1"
+            android:paddingLeft="4dp"
             android:paddingRight="4dp"
-            android:layout_marginRight="4dp"
-            android:drawablePadding="10dp"
-            android:visibility="visible"
-            android:paddingLeft="4dp" />
-
-
-
-
+            android:singleLine="true"
+            android:textSize="26sp"
+            android:visibility="visible" />
 
 
         <Button
+            android:id="@+id/plusButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:text="+"
-            android:id="@+id/plusButton"
-            android:background="@drawable/indigo_ind_button"
             android:layout_alignParentRight="true"
-            android:textSize="26sp"
+            android:background="@drawable/indigo_ind_button"
+            android:text="+"
             android:textColor="@color/white"
+            android:textSize="26sp"
             android:textStyle="bold"
             android:visibility="visible" />
 
         <Button
+            android:id="@+id/minusButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:text="-"
-            android:id="@+id/minusButton"
-            android:background="@drawable/indigo_ind_button"
             android:layout_toRightOf="@+id/plusTextView"
-            android:textStyle="bold"
-            android:textSize="28sp"
+            android:background="@drawable/indigo_ind_button"
+            android:text="-"
             android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
             android:visibility="visible"
 
-             />
+            />
 
         <NumberPicker
+            android:id="@+id/numberPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/numberPicker"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:visibility="gone" />
     </RelativeLayout>
 

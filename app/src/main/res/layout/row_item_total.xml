@@ -51,6 +51,7 @@
         android:background="@drawable/indigo_stroke"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
+        android:textColor="@color/dark_gray"
         android:paddingLeft="4dp"
         android:layout_marginRight="6dp"
         android:layout_marginLeft="2dp"

@@ -36,7 +36,7 @@ public class MainApplication extends Application {
 
 
         prefs = getSharedPreferences("com.app.barcodeclient3", MODE_PRIVATE);
-        int scanType = prefs.getInt(ScanSettingsActivity.scan_type, 1);
+        int scanType = prefs.getInt(ScanSettingsActivity.scan_type, 0);
         ScannerConstants.CURRENT_SCAN_MODE=scanType;
 
         readyDBHandler = new ReadyDBHandler();

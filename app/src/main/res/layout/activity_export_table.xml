@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_light"
+    android:padding="12dp"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/selectFileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите файл для загрузки"
+        android:backgroundTint="@color/accent"
+        android:drawableLeft="@drawable/ic_folder_open_white_24dp"
+        android:layout_alignParentTop="true"
+        />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/selectFileButton"
+        android:layout_above="@id/saveButton">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сохранить в базу"
+        android:backgroundTint="@color/accent"
+        android:drawableLeft="@drawable/ic_folder_open_white_24dp"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>
