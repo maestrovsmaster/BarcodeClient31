@@ -27,6 +27,14 @@
      <color name="dark_gray_a70" android:layout_width="wrap_content" android:layout_height="wrap_content"> #B3333331</color>
      
      <color name="navy_a50" android:layout_width="wrap_content" android:layout_height="wrap_content">#8021639d</color>
+
+
+    <color name="navy_background">#e6eef5</color>
+    <color name="navy_primary">#FFA4C7E6</color>
+    <color name="navy_primary_dark">#85a7c6</color>
+    <color name="navy_accent">#e9638a</color>
+
+
    
     <color android:id="@+id/color9" name="gold" android:layout_width="wrap_content" android:layout_height="wrap_content">  #ffc000</color>
    

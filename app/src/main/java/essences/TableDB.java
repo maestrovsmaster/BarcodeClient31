@@ -3,7 +3,7 @@ package essences;
 /**
  * Created by userd088 on 28.04.2016.
  */
-public abstract  class TableDB {
+public abstract  class TableDB extends A{
 
     private int id=0;
     private int grpId=0;

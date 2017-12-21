@@ -1,7 +1,7 @@
 package essences;
 
 public class Inventory  extends JorHeadTable{
-	
+
 	int id=-1;
 	String num="";
 	String datetime="";

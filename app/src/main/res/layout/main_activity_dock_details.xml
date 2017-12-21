@@ -21,7 +21,7 @@
                 android:gravity="center"
                 android:layout_gravity="end"
                 android:background="@drawable/blue_button1"
-                android:src="@drawable/abc_ic_clear_mtrl_alpha" />
+                android:src="@drawable/ic_search_black_24dp" />
 
             <TextView
                 android:id="@+id/title"
