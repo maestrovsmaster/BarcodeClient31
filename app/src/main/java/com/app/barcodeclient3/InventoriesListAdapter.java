@@ -52,6 +52,8 @@ public class InventoriesListAdapter extends ArrayAdapter {
         if(inventory.getDoc_state()==0) lock.setVisibility(View.GONE);
         else lock.setVisibility(View.VISIBLE);
 
+        v.setTag(inventory);
+
         return v;
     }
 }

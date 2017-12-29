@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view2"
@@ -16,18 +17,25 @@
 
 
         android:layout_marginRight="0dp"
-
+        android:background="@color/white"
 
         app:cardCornerRadius="1px">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="3dp"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
+            >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+
 
             >
 
@@ -40,21 +48,20 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="6dp"
                 android:src="@drawable/ic_more_vert_black_36dp"
-                android:tint="@color/icons" />
+                android:tint="@color/icons"
+                android:visibility="gone"/>
 
 
             <EditText
                 android:id="@+id/searchEt"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/searchBt"
+                android:layout_toStartOf="@id/searchBt"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/menuBt"
-                android:layout_toLeftOf="@+id/cameraBt"
-                android:layout_toRightOf="@id/menuBt"
-                android:layout_toStartOf="@+id/cameraBt"
-                android:drawableLeft="@drawable/ic_close_black_24dp"
-                android:drawableRight="@drawable/ic_search_black_24dp"
+
+
+
                 android:drawableTint="@color/primary"
                 android:lines="1"
                 android:maxLines="1"
@@ -64,147 +71,73 @@
                 />
 
 
+
             <ImageView
-                android:id="@+id/cameraBt"
+                android:id="@+id/searchBt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="6dp"
                 android:layout_marginLeft="6dp"
-                android:src="@drawable/ic_photo_camera_black_36dp"
-                android:tint="@color/icons" />
+                android:src="@drawable/ic_search_black_24dp"
+                android:drawableTint="@color/primary"
+                />
+
+
+
 
 
         </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="6dp"
+               >
+
+                <CheckBox
+                    android:id="@+id/checkArticle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/article_search"
+                    android:textSize="12sp"
+                    android:textColor="@color/secondary_text"/>
+
+
+                <ImageView
+                    android:id="@+id/cameraBt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:src="@drawable/ic_photo_camera_black_36dp"
+                    android:tint="@color/navy_accent"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
 
     </android.support.v7.widget.CardView>
 
-    <RelativeLayout
+    <expandablerecyclerview.sample.SimpleExpandableRecyclerView
+        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/primary_light">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="12dp"
 
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="12dp"
-            app:cardCornerRadius="4dp">
-
-
-            <LinearLayout
-                android:id="@+id/email_login_form"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp">
-
-
-                <TextView
-                    android:id="@+id/nameTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/accent"
-                    android:textSize="22sp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Хліб український звичайний нарізний Нива 0,5кг"
-                    tools:text='Хліб український звичайний нарізний "Нива" 0,5кг' />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="8dp"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/barc"
-                        android:textColor="@color/secondary_text"
-
-                        android:layout_marginRight="8dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/barcodeTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:text="1234567890123"
-                        android:textColor="@color/primary_text"
-                        tools:text="1234567890123" />
-
-
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/unit"
-                        android:textColor="@color/secondary_text"
-
-                        android:layout_marginRight="8dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/unitTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Шт"
-                        android:textColor="@color/primary_text"
-
-                        tools:text="Шт" />
-
-                </LinearLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/price"
-                        android:inputType="number"
-                        android:text="56.40"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Cnt"
-
-                        android:imeActionLabel="@string/adding_of_new_good"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="number"
-                        android:text="1.0"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 

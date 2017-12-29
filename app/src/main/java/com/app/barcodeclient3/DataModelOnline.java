@@ -12,11 +12,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
+import json_process.GoodJSON;
 import json_process.InventoryJSON;
+import main.MainApplication;
 
 import static main.MainApplication.executeStatement;
+import static main.MainApplication.getAppContext;
 import static main.MainApplication.h;
 import static main.MainApplication.isConnect;
 
@@ -150,6 +154,64 @@ public class DataModelOnline implements DataModelInterface{
             };
             thread.start();
         }
+
+
+    @Override
+    public void getGoodsList(Map<String,String> map,@NonNull Callback callback) {
+
+        final Callback call1=callback;
+
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                ArrayList<GoodJSON> goodsList = new ArrayList<>();
+                if(isConnect()) {
+                    Log.d("my","goods get is connect ok");
+                    String statement = getAppContext().getString(R.string.request_goods);
+                    JSONArray jsonArray = executeStatement(statement);
+                    Log.d("my","goods get stm ="+statement);
+                    if (jsonArray != null) {
+                        Log.d("my","goods list not null size = "+jsonArray.length());
+                        Log.d("my", "goods list = " + jsonArray.toString());
+                        if (jsonArray.length() > 0) {
+
+                            for(int i=0;i<jsonArray.length();i++){
+                                try {
+                                    JSONObject obj=jsonArray.getJSONObject(i);
+                                    Gson gson = new Gson();
+                                    GoodJSON goodJSON = gson.fromJson(obj.toString(),GoodJSON.class);
+                                    if(goodJSON!=null){
+                                        Log.d("my","goods ===+++= ok"+goodJSON.getName());
+                                        goodsList.add(goodJSON);
+                                    }
+                                    else Log.d("my","goods =---err");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Log.d("my","goods =---errtttt"+e.toString());
+                                }
+                            }
+
+                        }
+                    }else{
+                        Log.d("my","goods get is jsonArr null");
+                    }
+                }
+                final Response response = new Response(goodsList);
+                Log.d("my","goods send resp...");
+                h.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        call1.sendResult(response);
+                    }
+                });
+
+            }
+        };
+        thread.start();
+
+
+    }
+
 
 
 

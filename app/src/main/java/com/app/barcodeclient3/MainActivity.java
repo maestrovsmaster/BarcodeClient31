@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -255,6 +256,23 @@ public class MainActivity extends AppCompatActivity {
                 if(adapter==null) {
                     adapter = new InventoriesListAdapter(MainActivity.this, R.layout.row_inventory_document, invlist);
                     list.setAdapter(adapter);
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Log.d("my","click inv!");
+                            stop=true;
+                            InventoryJSON inventory = (InventoryJSON) view.getTag();
+                            if(inventory.getDoc_state()==0) {
+                                Intent intent = new Intent(MainActivity.this, newmainscanner.ScannerOfflineActivity.class);
+                                intent.putExtra("id", inventory.getId());
+                                intent.putExtra("name", inventory.getSubdivisionName());
+                                intent.putExtra("date", inventory.getDateTime());
+                                intent.putExtra("num", inventory.getNum());
+                                intent.putExtra("subdiv_id", inventory.getSubdivisionId());
+                                startActivity(intent);
+                            }
+                        }
+                    });
                 }
                 else{
                     Log.d("my","notifydataChanged");
@@ -272,6 +290,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        stop=false;
+    }
 
     private boolean disconnect=false;
 

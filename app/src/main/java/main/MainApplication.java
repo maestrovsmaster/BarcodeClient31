@@ -13,6 +13,7 @@ import android.util.Log;
 import com.app.barcodeclient3.DataModelInterface;
 import com.app.barcodeclient3.DataModelOnline;
 import com.google.gson.Gson;
+import com.rollbar.android.Rollbar;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.json.JSONArray;
@@ -61,9 +62,19 @@ public class MainApplication extends Application {
 
     private static DataModelInterface dataModel;
 
+    private String rollbarId="69b56ad85ef34390a56d40727dedf010";
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Rollbar.init(this, rollbarId, "production");
+
+        Rollbar.reportMessage("A test message Hello inventory!", "debug");
+
+
+        MainApplication.context = getApplicationContext();
+
 
 
         refreshOptions(MainApplication.this);
@@ -76,7 +87,11 @@ public class MainApplication extends Application {
 
 
     }
+    private static Context context;
 
+    public static Context getAppContext() {
+        return MainApplication.context;
+    }
 
     public static void refreshOptions(Context context)
     {

@@ -288,5 +288,12 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="settings_online_connect_checkbox">Use connect to Firebird database</string>
 
+    <string name="request_goods" translatable="false">select
+    dg.id,
+    dg.article,
+    dg.name,
+    (select first 1 db.barcode from dic_goods_barcodes db where db.goods_id = dg.id) as barcode
+    from dic_goods dg</string>
+
 
 </resources>

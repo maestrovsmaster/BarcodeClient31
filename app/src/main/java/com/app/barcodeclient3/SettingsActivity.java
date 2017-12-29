@@ -125,13 +125,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
-
             case android.R.id.home:
-
-
                 saveOptions();
-
-
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result", 11114);
                 setResult(Activity.RESULT_OK, returnIntent);

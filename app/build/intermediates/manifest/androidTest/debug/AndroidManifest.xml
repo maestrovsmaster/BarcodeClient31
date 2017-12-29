@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.barcodeclient3.test" >
+    package="com.app.barcodeclient3.test">
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
-
-    <instrumentation
-        android:name="com.android.test.runner.MultiDexTestRunner"
-        android:functionalTest="false"
-        android:handleProfiling="false"
-        android:label="Tests for com.app.barcodeclient3"
-        android:targetPackage="com.app.barcodeclient3" />
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="16" />
 
     <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+                     android:targetPackage="com.app.barcodeclient3"
+                     android:handleProfiling="false"
+                     android:functionalTest="false"
+                     android:label="Tests for com.app.barcodeclient3"/>
 </manifest>

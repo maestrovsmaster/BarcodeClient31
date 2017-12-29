@@ -12,27 +12,32 @@
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:id="@+id/idEx"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:textColor="@color/dark_gray"/>
 
 
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:id="@+id/nameEx" />
+        android:id="@+id/nameEx"
+        android:textColor="@color/dark_gray"/>
 
     <TextView
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:id="@+id/articleEx" />
+        android:id="@+id/articleEx"
+        android:textColor="@color/dark_gray"/>
 
     <TextView
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:id="@+id/unitEx" />
+        android:id="@+id/unitEx"
+        android:textColor="@color/dark_gray"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/barcodeEx" />
+        android:id="@+id/barcodeEx"
+        android:textColor="@color/dark_gray"/>
 
 </LinearLayout>

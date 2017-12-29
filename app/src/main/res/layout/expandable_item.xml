@@ -1,0 +1,188 @@
+<expandablerecyclerview.sample.SimpleItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/background_selector"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="4dp"
+    card_view:cardUseCompatPadding="true"
+    app:cardCornerRadius="5dp"
+
+    >
+
+
+
+    <RelativeLayout
+        android:id="@+id/collapsed_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+            android:id="@+id/collapsed_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Andrii Panasiuk"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/collapsed_name"
+            android:layout_alignTop="@id/collapsed_name"
+            android:background="@drawable/left_rounded_rectangle"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/expanded_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/expanded_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top_rounded_rectangle"
+            android:paddingBottom="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:text="Товар"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/contributions_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/expanded_name"
+            android:lineSpacingExtra="2dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Contribution 1 /n Contribution2"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/expanded_name"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+
+            <TextView
+                android:id="@+id/nameTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent"
+                android:textSize="22sp"
+                android:layout_marginBottom="10dp"
+                android:text="Хліб український звичайний нарізний Нива 0,5кг"
+                tools:text='Хліб український звичайний нарізний "Нива" 0,5кг'
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/barc"
+                    android:textColor="@color/secondary_text"
+
+                    android:layout_marginRight="8dp"
+                    />
+
+                <TextView
+                    android:id="@+id/barcodeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="1234567890123"
+                    android:textColor="@color/primary_text"
+                    tools:text="1234567890123" />
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/unit"
+                    android:textColor="@color/secondary_text"
+
+                    android:layout_marginRight="8dp"
+                    />
+
+                <TextView
+                    android:id="@+id/unitTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Шт"
+                    android:textColor="@color/primary_text"
+
+                    tools:text="Шт" />
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/price"
+                    android:inputType="number"
+                    android:text="56.40"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Cnt"
+
+                    android:imeActionLabel="@string/adding_of_new_good"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="number"
+                    android:text="1.0"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</expandablerecyclerview.sample.SimpleItemView>

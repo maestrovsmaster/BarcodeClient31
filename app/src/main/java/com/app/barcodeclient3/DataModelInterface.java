@@ -7,6 +7,7 @@ package com.app.barcodeclient3;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import essences.Inventory;
 
@@ -19,4 +20,6 @@ public interface DataModelInterface {
     void getInventoryList(Callback callback);
 
     void getDatabaseVersion(Callback callback);
+
+    void getGoodsList(Map<String, String> options, Callback callback);
 }

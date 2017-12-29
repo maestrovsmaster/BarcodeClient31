@@ -31,19 +31,16 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustNothing" />
+
+
+
+
         <activity
             android:name="com.app.barcodeclient3.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/MainActivityTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
-        <activity android:name="com.app.barcodeclient3.SettingsActivity"
-            android:theme="@style/MainActivityTheme">
 
         </activity>
 
@@ -51,24 +48,32 @@
             android:name="newmainscanner.ScannerOfflineActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen2"
+            android:theme="@style/MainActivityTheme"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <activity android:name="com.app.barcodeclient3.SettingsActivity"
+            android:theme="@style/MainActivityTheme">
+
+        </activity>
+
+
+
+
+
+
         <activity
             android:name="newmainscanner.NewScannerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name="excel.ExportTableActivity"
