@@ -16,7 +16,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import devicesList.DevicesListActivity;
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestInventoryDtEditCnt {
 	
@@ -64,7 +65,7 @@ public class RequestInventoryDtEditCnt {
             String  returnString="";
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/InventoryEditCntServlet");
+                 URL url = new URL(MainApplication.mainURL+"/InventoryEditCntServlet");
                  URLConnection connection = url.openConnection();
                  
                  JSONObject  jsonObject = new JSONObject();

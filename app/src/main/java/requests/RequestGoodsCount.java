@@ -9,7 +9,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestGoodsCount {
 
@@ -31,7 +32,7 @@ public class RequestGoodsCount {
 
 	public void request() {
 			String  returnString="";
-    		String urlStr= MainActivity.mainURL+"/GoodsCountServlet";
+    		String urlStr= MainApplication.mainURL+"/GoodsCountServlet";
     		
 
     		

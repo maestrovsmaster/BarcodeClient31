@@ -40,7 +40,6 @@ import essences.Good;
 import essences.Inventory;
 import requests.RequestGoodsList;
 import scanworkingactivity.ScanWorkingActivity;
-import startactivity.MainActivity;
 
 /**
  * Список товаров в дереве категорий
@@ -230,7 +229,7 @@ boolean newScan=true;
 		//setListAdapter(null);
 	//	showProgressBar(true, "");
 	//	setListShown(true);
-		if(MainActivity.OFFLINE_MODE)
+		if(MainApplication.OFFLINE_MODE)
 		{
 			LoadGoodsOfflineThread load = new LoadGoodsOfflineThread();
 			load.start();

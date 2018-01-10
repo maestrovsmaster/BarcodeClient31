@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import adapter.GoodsGrpListAdapter;
 import essences.GoodGRP;
 import requests.RequestGoodsGRP;
-import startactivity.MainActivity;
 
 public class TreeGrpAndGoodsActivity extends Activity{
 	
@@ -164,7 +163,7 @@ public class TreeGrpAndGoodsActivity extends Activity{
 
 
 
-			 if(MainActivity.OFFLINE_MODE)
+			 if(MainApplication.OFFLINE_MODE)
 			 {
 				 Log.d("my",""+getClass().toString()+" offline ...");
 				// ArrayList<GoodGRP> grpList = new ArrayList<>();

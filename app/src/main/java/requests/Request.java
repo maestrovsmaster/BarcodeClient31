@@ -9,7 +9,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class Request {
 	
@@ -35,7 +36,7 @@ public class Request {
             String  returnString="";
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/Request");
+                 URL url = new URL(MainApplication.mainURL+"/Request");
                  URLConnection connection = url.openConnection();
 
                  JSONObject jsonObject0 = new JSONObject();

@@ -14,7 +14,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 import essences.Good;
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestGoodsList {
 	
@@ -111,8 +112,8 @@ public class RequestGoodsList {
 	public void request() {
 			String  returnString="";
     		String urlStr="";
-    		 if(type==0)urlStr= MainActivity.mainURL+"/GoodsListServlet";
-    		 if(type==1)urlStr= MainActivity.mainURL+"/GoodsByBarcodeServlet";
+    		 if(type==0)urlStr= MainApplication.mainURL+"/GoodsListServlet";
+    		 if(type==1)urlStr= MainApplication.mainURL+"/GoodsByBarcodeServlet";
     		
     		
     		

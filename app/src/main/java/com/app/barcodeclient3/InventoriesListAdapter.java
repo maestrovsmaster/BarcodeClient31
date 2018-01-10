@@ -1,8 +1,11 @@
 package com.app.barcodeclient3;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,11 @@ import java.util.List;
 
 import essences.Inventory;
 import json_process.InventoryJSON;
+import main.MainApplication;
+import newmainscanner.NewScannerActivity;
+
+import static main.MainApplication.CONNECT_OFFLINE;
+import static main.MainApplication.connectMode;
 
 /**
  * Created by MaestroVS on 19.12.2017.
@@ -42,8 +50,21 @@ public class InventoriesListAdapter extends ArrayAdapter {
         TextView subdivisionVT = v.findViewById(R.id.subdivision);
         TextView date =  v.findViewById(R.id.date);
         ImageView lock = v.findViewById(R.id.lock);
+        ImageView delete = v.findViewById(R.id.delete);
+        delete.setVisibility(connectMode==CONNECT_OFFLINE?View.VISIBLE:View.GONE);
 
-        InventoryJSON inventory = inventories.get(position);
+        final InventoryJSON inventory = inventories.get(position);
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = inventory.getId();
+                 deleteInventory(view.getContext() ,id);
+            }
+        });
+
+
 
         numTV.setText(inventory.getNum());
         subdivisionVT.setText(inventory.getSubdivisionName());
@@ -55,5 +76,38 @@ public class InventoriesListAdapter extends ArrayAdapter {
         v.setTag(inventory);
 
         return v;
+    }
+
+
+    private void deleteInventory(Context _context, int _id)
+    {
+
+        final int id = _id;
+        final Context context = _context;
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        MainApplication.dbHelper.clear_INVENTORY(id);
+
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        if(MainApplication.getAppContext()==null){
+            Log.d("my","app context is null!!!");
+        }else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage(context.getString(R.string.delete_inventory_dialog)).setPositiveButton("Ok", dialogClickListener)
+                    .setNegativeButton(context.getString(R.string.cancel), dialogClickListener).show();
+        }
     }
 }

@@ -14,7 +14,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
  */
 public class AnimatorHelper {
 
-    public static final int DURATION = 600;
+    public static final int DURATION = 300;
 
     public static void crossfadeViews(View container, final View viewToFadeIn, final View viewToFadeOut,
                                       int currentHeight, int desiredHeight) {

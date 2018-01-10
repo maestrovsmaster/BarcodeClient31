@@ -11,7 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import essences.Device;
-import startactivity.MainActivity;
+import main.MainApplication;
 
 public class RequestDeleteDevice {
 
@@ -36,7 +36,7 @@ public class RequestDeleteDevice {
 
 	public void request() {
 			String  returnString="";
-    		String urlStr= MainActivity.mainURL+"/DeleteDeviceServlet";
+    		String urlStr= MainApplication.mainURL+"/DeleteDeviceServlet";
 
     		
     		 try{

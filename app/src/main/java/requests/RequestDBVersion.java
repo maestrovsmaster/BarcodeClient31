@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import startactivity.MainActivity;
+import main.MainApplication;
 
 public class RequestDBVersion {
 	
@@ -49,7 +49,7 @@ public class RequestDBVersion {
     		 try{
 
 
-                 URL url = new URL(MainActivity.mainURL+"/StateServlet");
+                 URL url = new URL(MainApplication.mainURL+"/StateServlet");
                  URLConnection connection = url.openConnection();
 
                  JSONObject  jsonObject = new JSONObject();

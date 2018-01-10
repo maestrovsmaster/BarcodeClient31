@@ -28,7 +28,7 @@ import essences.GoodGRP;
 import requests.RequestGoodsCount;
 import requests.RequestGoodsGRP;
 import requests.RequestGoodsList;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
 
 
 public class OfflineModeActivity extends Activity  {
@@ -107,18 +107,18 @@ public class OfflineModeActivity extends Activity  {
 			public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 				if(b){
 					offlineIcon.setVisibility(View.VISIBLE);
-					MainActivity.OFFLINE_MODE=true;
+					MainApplication.OFFLINE_MODE=true;
 					MainApplication.dbHelper.insertOrReplaceOption("OFFLINE_MODE","1");
 				}
 				else{
 					offlineIcon.setVisibility(View.GONE);
-					MainActivity.OFFLINE_MODE=false;
+					MainApplication.OFFLINE_MODE=false;
 					MainApplication.dbHelper.insertOrReplaceOption("OFFLINE_MODE","0");
 				}
 			}
 		});
 
-		if(MainActivity.OFFLINE_MODE) {
+		if(MainApplication.OFFLINE_MODE) {
 			offlineIcon.setVisibility(View.VISIBLE);
 			checkOffline.setChecked(true);
 		}else{

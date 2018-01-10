@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +26,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +41,8 @@ import main.Dom;
 import main.MainApplication;
 import requests.Request;
 import requests.RequestInventoryList;
-import startactivity.MainActivity;
+
+import static main.MainApplication.OFFLINE_MODE;
 
 
 public class DockListActivity extends AppCompatActivity //ListActivity
@@ -207,13 +206,13 @@ public class DockListActivity extends AppCompatActivity //ListActivity
 
         countDocksDB = (TextView) findViewById(R.id.countDocksDB);
 
-        countDocksDB.setText("OfflineMode = "+MainActivity.OFFLINE_MODE);
+        countDocksDB.setText("OfflineMode = "+OFFLINE_MODE);
 
         switch (docType) {
             case 0:
                 Log.d("my","Переучет");
                 title.setText(getResources().getString(R.string.inventory));
-                if(MainActivity.OFFLINE_MODE) loadDocListOffline();
+                if(OFFLINE_MODE) loadDocListOffline();
                  else   loadDocList();
                 break;
             case 1:
@@ -251,7 +250,7 @@ public class DockListActivity extends AppCompatActivity //ListActivity
             case 0:
                 Log.d("my","Переучет");
                 title.setText(getResources().getString(R.string.inventory));
-                if(MainActivity.OFFLINE_MODE) loadDocListOffline();
+                if(OFFLINE_MODE) loadDocListOffline();
                 else   loadDocList();
                 break;
             case 1:
@@ -284,7 +283,7 @@ public class DockListActivity extends AppCompatActivity //ListActivity
 
             RequestInventoryList requestInventoryList = new RequestInventoryList();
 
-            if (!MainActivity.OFFLINE_MODE){
+            if (!OFFLINE_MODE){
                 Log.d("my"," CLEAR=====================");
                 docList.clear();/////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             }
@@ -337,7 +336,7 @@ public class DockListActivity extends AppCompatActivity //ListActivity
     Runnable readyLoadDocks = new Runnable() {
         @Override
         public void run() {
-            countDocksDB.setText("OfflineMode = " + MainActivity.OFFLINE_MODE + "\n\r" +
+            countDocksDB.setText("OfflineMode = " + OFFLINE_MODE + "\n\r" +
                     "count of Docks in DB=" + docList.size());
 
             if(docList.size()==0){

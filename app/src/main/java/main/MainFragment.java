@@ -20,13 +20,17 @@ import com.app.barcodeclient3.R;
 
 import org.json.JSONObject;
 
-import connect.ConnectConstants;
 import docklist.DockListActivity;
 //import excel.AndroidReadExcelActivity;
 import requests.RequestDBVersion;
 import requests.RequestUniversalQuery;
 import scanworkingactivity.TotalGoodsListActivity;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
+
+import static main.MainApplication.OFFLINE_MODE;
+import static main.MainApplication.mainURL;
+import static main.MainApplication.serverIP;
+import static main.MainApplication.serverPort;
 
 /**
  * Created by userd088 on 14.09.2015.
@@ -189,7 +193,7 @@ public class MainFragment extends Fragment{
     public void onStart() {
         super.onStart();
         Log.d("my","ON START!!!!000");
-        if(MainActivity.OFFLINE_MODE)
+        if(OFFLINE_MODE)
         {
             webView.setVisibility(View.GONE);
             errorTextView.setVisibility(View.GONE);
@@ -232,7 +236,7 @@ public class MainFragment extends Fragment{
 
     public  void updateStatus()
     {
-        stateUrl = MainActivity.mainURL + "/StateServlet";
+        stateUrl = mainURL + "/StateServlet";
         err="";
         hrefEditText.setText("/StateServlet");
         //hrefEditText.setText("Login?login=&pass=&submit=Войти");
@@ -335,7 +339,7 @@ public class MainFragment extends Fragment{
         statusRelative.setBackgroundColor(getResources().getColor(R.color.ligth_gray));
         //statusImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_error_red_48dp));
         statusTextView.setText(R.string.no_connect_to_server);
-        ipConnectTextView.setText(MainActivity.serverIP + ":" + MainActivity.serverPort);
+        ipConnectTextView.setText(serverIP + ":" + serverPort);
         errorTextView.setText(err);
 
         settingsImageView.setVisibility(View.VISIBLE);

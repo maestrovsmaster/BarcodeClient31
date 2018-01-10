@@ -28,6 +28,28 @@ public class InventoryJSON {
     @Expose
     private int doc_state=0;
 
+    public InventoryJSON(){
+
+    }
+
+    /**
+     *
+     * @param id
+     * @param num
+     * @param dateTime
+     * @param subdivisionId
+     * @param subdivisionName
+     * @param doc_state
+     */
+    public InventoryJSON(Integer id, String num, String dateTime, Integer subdivisionId, String subdivisionName, int doc_state) {
+        this.id = id;
+        this.num = num;
+        this.dateTime = dateTime;
+        this.subdivisionId = subdivisionId;
+        this.subdivisionName = subdivisionName;
+        this.doc_state = doc_state;
+    }
+
     public Integer getId() {
         return id;
     }

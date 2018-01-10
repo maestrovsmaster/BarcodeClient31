@@ -2,7 +2,6 @@ package scanworkingactivity;
 
 
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,12 +19,11 @@ import android.widget.TextView;
 import com.app.barcodeclient3.R;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import adapter.CustomizedSpinnerAdapter;
 import main.MainApplication;
 import newmainscanner.NewScannerActivity;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
 
 /**
  * Created by userd088 on 20.07.2016.

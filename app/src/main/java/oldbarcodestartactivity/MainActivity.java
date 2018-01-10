@@ -1,15 +1,12 @@
-package startactivity;
+package oldbarcodestartactivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,20 +24,12 @@ import android.widget.ListView;
 
 import com.app.barcodeclient3.R;
 
-import java.util.ArrayList;
-
-import adapter.DatabaseHelper;
 import docklist.DockListActivity;
-import essences.GoodGRP;
-import essences.Inventory;
 import main.MainApplication;
 import main.MainFragment;
 import main.OfflineModeActivity;
 import main.SettingsActivity;
 import newmainscanner.NewScannerActivity;
-import requests.RequestGoodsGRP;
-import scanworkingactivity.ScanWorkingActivity;
-import start.WellcomeActivity2;
 
 public class MainActivity extends Activity {
 
@@ -64,18 +53,13 @@ public class MainActivity extends Activity {
 
     int docType = 0;
 
+    //-----------
 
 
-    public static String serverIP = "";
-    public static String serverPort = "";
-    public static String serverName = "BarcodeServer3";
 
-    public static boolean OFFLINE_MODE = false;
 
-    public static String mainURL = ""; //"http://192.168.65.156:8080/BarcodeServer3";//Main !!!!!!!!!!!!!!
 
-    public static String WEIGTH_BARCODE_MASK = "";
-    public static String WEIGTH_BARCODE = "";
+
 
     private static final int SETTINGS_ACTIVITY_REQUEST_CODE = 11;
 
@@ -183,7 +167,7 @@ public class MainActivity extends Activity {
         startHandler.postAtTime(new Runnable() {
             @Override
             public void run() {
-                if(MainActivity.OFFLINE_MODE){
+                if(MainApplication.OFFLINE_MODE){
 
                     startNewScanActivity();
 

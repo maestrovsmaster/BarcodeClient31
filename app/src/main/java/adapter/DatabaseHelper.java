@@ -2,7 +2,6 @@ package adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -17,7 +16,6 @@ import essences.GoodGRP;
 import essences.Inventory;
 import essences.Subdivision;
 import main.MainApplication;
-import startactivity.MainActivity;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 
@@ -684,7 +682,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 
 		try {
 			String insertQuery = " INSERT INTO  "
-					+ DatabaseHelper.JOR_INVENTORY + " (ID, NUM, DATETIME, SUBDIV, DOC_TYPE ) VALUES ("+id+ ",'"
+					+ DatabaseHelper.JOR_INVENTORY + " (ID, NUM, DATETIME, SUBDIV, DOC_TYPE ) VALUES (null,'"
 					+ num + "','"
 					+ datetime + "','"
 					+ subdiv + "'," +doc_type

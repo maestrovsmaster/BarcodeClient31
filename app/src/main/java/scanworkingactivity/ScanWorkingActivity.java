@@ -1,7 +1,6 @@
 package scanworkingactivity;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -9,9 +8,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -62,9 +57,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import adapter.GoodsGrpListAdapter;
 import essences.Good;
-import essences.GoodGRP;
 import essences.Inventory;
 import excel.FileLoader;
 import main.MainApplication;
@@ -73,7 +66,7 @@ import main.TreeGrpAndGoodsActivity;
 import requests.RequestGoodsList;
 import requests.RequestInventoryDtEditCnt;
 import requests.RequestScanSettings;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
 
 
 public class ScanWorkingActivity extends ListActivity {
@@ -225,7 +218,7 @@ public class ScanWorkingActivity extends ListActivity {
 		closeButton = (ImageButton) mainActionBar.getCustomView().findViewById(R.id.closeButton);
 		abarTitle=(TextView)mainActionBar.getCustomView().findViewById(R.id.abarTitle);
 		TextView offlineTW = (TextView) mainActionBar.getCustomView().findViewById(R.id.offlineIcon);
-		if(MainActivity.OFFLINE_MODE){
+		if(MainApplication.OFFLINE_MODE){
 			offlineTW.setVisibility(View.VISIBLE);
 		}
 		else {
@@ -461,17 +454,17 @@ public class ScanWorkingActivity extends ListActivity {
 	{
 		@Override
 		public void run() {
-			if(!MainActivity.OFFLINE_MODE) {
+			if(!MainApplication.OFFLINE_MODE) {
 				RequestScanSettings requestScanSettings = new RequestScanSettings();
 				JSONObject scanJSON = requestScanSettings.getScanSettings();
 				Log.d("my", "scan settings = " + scanJSON.toString());
 				if (scanJSON.length() > 0) {
 					try {
-						MainActivity.WEIGTH_BARCODE = scanJSON.getString("WEIGTH_BARCODE");
+						MainApplication.WEIGTH_BARCODE = scanJSON.getString("WEIGTH_BARCODE");
 					} catch (Exception e) {
 					}
 					try {
-						MainActivity.WEIGTH_BARCODE_MASK = scanJSON.getString("WEIGTH_BARCODE_MASK");
+						MainApplication.WEIGTH_BARCODE_MASK = scanJSON.getString("WEIGTH_BARCODE_MASK");
 					} catch (Exception e) {
 					}
 				}
@@ -491,13 +484,13 @@ public class ScanWorkingActivity extends ListActivity {
 
 	private void checkWeigthBarcode(String barcode)
 	{
-		if(MainActivity.WEIGTH_BARCODE.length()>=11&& MainActivity.WEIGTH_BARCODE_MASK.length()>=2 )
+		if(MainApplication.WEIGTH_BARCODE.length()>=11&& MainApplication.WEIGTH_BARCODE_MASK.length()>=2 )
 		{
 
 			//String pref1=MainActivity.WEIGTH_BARCODE.substring(2,4);
 			//String pref2=MainActivity.WEIGTH_BARCODE.substring(2,4);
 			//String pref3=MainActivity.WEIGTH_BARCODE.substring(2,4);
-			getScanPrefixs(MainActivity.WEIGTH_BARCODE);
+			getScanPrefixs(MainApplication.WEIGTH_BARCODE);
 
 		}
 	}
@@ -655,10 +648,10 @@ public class ScanWorkingActivity extends ListActivity {
 		public void run() {
 			RequestGoodsList requestServer = new RequestGoodsList();
 			ArrayList<Good> goodsList = new ArrayList<>();
-			if(!MainActivity.OFFLINE_MODE) {
+			if(!MainApplication.OFFLINE_MODE) {
 				goodsList = requestServer.getGoodsListByBarcode(id, barcode, article,name);
 			}
-			if(MainActivity.OFFLINE_MODE) {
+			if(MainApplication.OFFLINE_MODE) {
 				goodsList = MainApplication.dbHelper.getGoodList(name, article, barcode, id);
 			}
 
@@ -691,7 +684,7 @@ public class ScanWorkingActivity extends ListActivity {
 				case 0:
 					clearGoodInfo();
 					searchFocusable(true);
-					if(MainActivity.OFFLINE_MODE) {//dialog. Tovar ne naiden sozdat' ?
+					if(MainApplication.OFFLINE_MODE) {//dialog. Tovar ne naiden sozdat' ?
 					/*	createGoodDialogBuilder = new AlertDialog.Builder(ScanWorkingActivity.this);
 						createGoodDialogBuilder.setMessage(getString(R.string.good_not_found_create)).setPositiveButton(getString(R.string.create), createGoodDialogClickListener)
 								.setNegativeButton(getString(R.string.cancel), createGoodDialogClickListener);
@@ -1304,7 +1297,7 @@ public class ScanWorkingActivity extends ListActivity {
 		@Override
 		public void run() {
 
-			if(MainActivity.OFFLINE_MODE){
+			if(MainApplication.OFFLINE_MODE){
 				MainApplication.dbHelper.insertGoodsAcCnt(invId, goodId, cnt);
 				tempOfflineAnsCnt= MainApplication.dbHelper.getGoodCountAcc(invId,goodId);
 				h2.post(readyOffLineInvWriteCnt);
@@ -1452,7 +1445,7 @@ public class ScanWorkingActivity extends ListActivity {
 		//exportInvToXLS()
 
 		String expType="";
-		if(!MainActivity.OFFLINE_MODE){
+		if(!MainApplication.OFFLINE_MODE){
 			expType=getString(R.string.export_server);
 		}else{
 			expType=getString(R.string.export_file);
@@ -1464,7 +1457,7 @@ public class ScanWorkingActivity extends ListActivity {
 				.setPositiveButton(expType, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 
-						if(MainActivity.OFFLINE_MODE){
+						if(MainApplication.OFFLINE_MODE){
 							exportInvToXLS();
 						}else {
 							exportProgress.setVisibility(View.VISIBLE);
@@ -1715,7 +1708,7 @@ public class ScanWorkingActivity extends ListActivity {
 
 			Button folder = (Button) view.findViewById(R.id.folder);
 			folder.setOnClickListener(goodsListListener);
-			if(MainActivity.OFFLINE_MODE)folder.setVisibility(View.GONE);
+			if(MainApplication.OFFLINE_MODE)folder.setVisibility(View.GONE);
 
 			view.findViewById(R.id.list).setOnClickListener(new View.OnClickListener() {
 				@Override

@@ -1,21 +1,16 @@
 package start;
 
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.app.barcodeclient3.R;
-
-import main.MainApplication;
-import startactivity.MainActivity;
 
 /**
  * Created by userd088 on 30.03.2016.

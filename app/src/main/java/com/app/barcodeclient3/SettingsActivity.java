@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -20,19 +21,30 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import main.MainApplication;
 
+import static main.MainApplication.CONNECT_OFFLINE;
+import static main.MainApplication.CONNECT_ONLINE;
+import static main.MainApplication.CONNECT_SERVER;
+import static main.MainApplication.OPT_CONNECT_MODE;
+import static main.MainApplication.OPT_IP;
+import static main.MainApplication.OPT_PATH;
 import static main.MainApplication.databaseIP;
 import static main.MainApplication.databasePath;
-import static main.MainApplication.onlineMode;
+import static main.MainApplication.connectMode;
 import static main.MainApplication.refreshOptions;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    @BindView(R.id.offlineCheckBox)CheckBox offlineCheckBox;
 
     @BindView(R.id.onlineCheclBox)CheckBox onlineCheckBox;
     @BindView(R.id.connectLayout)LinearLayout connectLayout;
     @BindView(R.id.ipTV)EditText ipTV;
     @BindView(R.id.pathTV)EditText pathTV;
+
+    @BindView(R.id.barcodeCheckBox)CheckBox barcodeCheckBox;
+    @BindView(R.id.connectBarcLayout)LinearLayout connectBarcLayout;
+    @BindView(R.id.ipbarcodeTV)EditText ipbarcodeTV;
 
 
 
@@ -71,20 +83,62 @@ public class SettingsActivity extends AppCompatActivity {
         parent.setPadding(0, 0, 0, 0);//for tab otherwise give space in tab
         parent.setContentInsetsAbsolute(0, 0);
 
-        onlineCheckBox.setChecked(onlineMode);
-        if(onlineMode) connectLayout.setVisibility(View.VISIBLE);
-        else connectLayout.setVisibility(View.GONE);
+        offlineCheckBox.setChecked(connectMode==CONNECT_OFFLINE?true:false);
+        barcodeCheckBox.setChecked(connectMode==CONNECT_SERVER?true:false);
+        onlineCheckBox.setChecked(connectMode==CONNECT_ONLINE?true:false);
+        connectLayout.setVisibility(onlineCheckBox.isChecked()?View.VISIBLE:View.GONE);
+        connectBarcLayout.setVisibility(barcodeCheckBox.isChecked()?View.VISIBLE:View.GONE);
+
+
+        offlineCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    connectLayout.setVisibility(View.GONE);
+                    connectBarcLayout.setVisibility(View.GONE);
+                    barcodeCheckBox.setChecked(false);
+                    onlineCheckBox.setChecked(false);
+                }
+
+            }
+        });
+
 
         onlineCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b) connectLayout.setVisibility(View.VISIBLE);
+                if(b){
+                    connectLayout.setVisibility(View.VISIBLE);
+                    connectBarcLayout.setVisibility(View.GONE);
+                    barcodeCheckBox.setChecked(false);
+                    offlineCheckBox.setChecked(false);
+                }
                 else connectLayout.setVisibility(View.GONE);
             }
         });
 
         ipTV.setText(databaseIP);
         pathTV.setText(databasePath);
+
+
+        //---
+
+
+
+        ipbarcodeTV.setText(databaseIP);
+        barcodeCheckBox.setChecked(connectMode==CONNECT_SERVER?true:false);
+        barcodeCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    connectBarcLayout.setVisibility(View.VISIBLE);
+                    connectLayout.setVisibility(View.GONE);
+                    onlineCheckBox.setChecked(false);
+                    offlineCheckBox.setChecked(false);
+                }
+                else connectBarcLayout.setVisibility(View.GONE);
+            }
+        });
 
 
     }
@@ -94,11 +148,17 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         String ip = ipTV.getText().toString();
+        if(barcodeCheckBox.isChecked()) ip= ipbarcodeTV.getText().toString();
         String path=pathTV.getText().toString();
-        boolean onlineMode = onlineCheckBox.isChecked();
-        editor.putString("IP", ip);
-        editor.putString("PATH", path);
-        editor.putBoolean("ONLINE_MODE",onlineMode);
+
+        editor.putString(OPT_IP, ip);
+        editor.putString(OPT_PATH, path);
+        int mode= CONNECT_OFFLINE;
+        if(onlineCheckBox.isChecked()) mode=CONNECT_ONLINE;
+        if(barcodeCheckBox.isChecked()) mode = CONNECT_SERVER;
+
+        Log.d("my","save options: mode = "+mode);
+        editor.putInt(OPT_CONNECT_MODE,mode);
         editor.commit();
         refreshOptions(SettingsActivity.this);
     }

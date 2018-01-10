@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,17 +20,12 @@ import com.app.barcodeclient3.R;
 
 import java.util.ArrayList;
 
-import essences.BillIn;
 import essences.BillInDt;
-import essences.DicTable;
 import essences.Good;
 import essences.Inventory;
 import essences.JorDtTable;
-import essences.JorDtTableInterface;
-import essences.Unit;
 import main.MainApplication;
 import scanworkingactivity.ScanWorkingActivity;
-import startactivity.MainActivity;
 
 
 public class DoksDetailsAdapter<T> extends ArrayAdapter<JorDtTable> {

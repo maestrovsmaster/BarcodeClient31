@@ -1,7 +1,5 @@
 package requests;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,10 +9,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
-import essences.GoodGRP;
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestUniversalQuery {
 	
@@ -41,7 +38,7 @@ public class RequestUniversalQuery {
             String  returnString="";
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/UniversalQueryServlet");
+                 URL url = new URL(MainApplication.mainURL+"/UniversalQueryServlet");
                  URLConnection connection = url.openConnection();
                  Log.d("my", query);
 

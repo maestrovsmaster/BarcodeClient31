@@ -33,7 +33,6 @@ import java.util.regex.Pattern;
 import essences.DicTable;
 import essences.Good;
 import main.MainApplication;
-import startactivity.MainActivity;
 
 /**
  * Created by userd088 on 13.07.2016.
@@ -156,7 +155,7 @@ public class TotalGoodsListActivity     extends ListActivity {
 
             goodsList.clear();
 
-            if(MainActivity.OFFLINE_MODE) {
+            if(MainApplication.OFFLINE_MODE) {
 
 
 

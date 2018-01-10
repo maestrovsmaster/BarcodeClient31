@@ -14,7 +14,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 import essences.GoodGRP;
-import startactivity.MainActivity;
+import main.MainApplication;
 
 public class RequestGoodsGRP {
 	
@@ -50,7 +50,7 @@ public class RequestGoodsGRP {
             String  returnString="";
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/GoodsGRPListServlet");
+                 URL url = new URL(MainApplication.mainURL+"/GoodsGRPListServlet");
                  URLConnection connection = url.openConnection();
 
                  String inputString = Integer.toString(grp_id);

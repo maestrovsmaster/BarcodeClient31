@@ -16,18 +16,14 @@
         android:icon="@drawable/icon_2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="main.MainActivityOld"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name="start.WellcomeActivity2"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="startactivity.MainActivity"
+            android:name="oldbarcodestartactivity.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustNothing" />
@@ -40,7 +36,10 @@
             android:label="@string/title_activity_main"
             android:theme="@style/MainActivityTheme">
 
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -50,6 +49,8 @@
             android:label="@string/app_name"
             android:theme="@style/MainActivityTheme"
             android:windowSoftInputMode="adjustNothing">
+
+
 
         </activity>
 
@@ -69,10 +70,7 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.Light">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
         <activity
@@ -121,7 +119,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name" />
         <activity
-            android:name="startactivity.AboutAppActivity"
+            android:name="oldbarcodestartactivity.AboutAppActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:label="@string/app_name" />
         <activity

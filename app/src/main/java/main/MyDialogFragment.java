@@ -22,7 +22,9 @@ import org.json.JSONObject;
 
 import essences.Good;
 import requests.RequestInventoryDtEditCnt;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
+
+import static main.MainApplication.OFFLINE_MODE;
 
 public  class MyDialogFragment extends DialogFragment {
     int mNum;
@@ -258,7 +260,7 @@ public  class MyDialogFragment extends DialogFragment {
 
 		@Override
 		public void run() {
-			if(MainActivity.OFFLINE_MODE)
+			if(OFFLINE_MODE)
 			{
 				MainApplication.dbHelper.insertGoodsAcCnt(invId,goodId,cnt);
 				h.post(new Runnable() {

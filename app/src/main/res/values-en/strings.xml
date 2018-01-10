@@ -121,4 +121,8 @@
     <string name="back_to_invs_list">Back to inventories</string>
     <string name="adding_of_new_good">Adding a new product</string>
     <string name="article_search">search only  article</string>
+    <string name="settings_online_connect_checkbox" translatable="false">Use connect to Firebird database</string>
+    <string name="settings_barcodeserver_connect_checkbox">Use connect to BarcodeServer31 (old)</string>
+
+
 </resources>

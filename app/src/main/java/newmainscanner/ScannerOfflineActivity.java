@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,10 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.barcodeclient3.Callback;
@@ -52,6 +56,9 @@ import expandablerecyclerview.sample.SimpleItemView;
 import json_process.GoodJSON;
 import main.MainApplication;
 
+import static com.app.barcodeclient3.DataModelInterface.ARTICLE;
+import static com.app.barcodeclient3.DataModelInterface.BARCODE;
+import static com.app.barcodeclient3.DataModelInterface.NAME;
 import static main.MainApplication.SETTINGS_STATE;
 
 /**
@@ -64,9 +71,11 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
 
     @BindView(R.id.searchBt) ImageView searchBt;
     @BindView(R.id.searchEt)EditText searchEt;
-    @BindView(R.id.list)SimpleExpandableRecyclerView mList;
+    @BindView(R.id.list)ListView mList;
     @BindView(R.id.cameraBt)ImageView cameraBt;
     @BindView(R.id.checkArticle)CheckBox checkArticle;
+    @BindView(R.id.progress) ProgressBar progress;
+    @BindView(R.id.resultLb)TextView resultLb;
 
     private int inv_id = -1;
     private String inv_subdiv = "";
@@ -107,6 +116,7 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
         titleBar =  abarView.findViewById(R.id.abarTitle);
         statusButton = abarView.findViewById(R.id.statusButton);
         statusButton.setVisibility(View.GONE);
+        progress.setVisibility(View.GONE);
         settingsButton =  abarView.findViewById(R.id.settingsButton);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settingsButton.setImageDrawable(getResources().getDrawable(R.drawable.tint_ic_more,null));
@@ -169,7 +179,8 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
                 boolean art = checkArticle.isChecked();
                 if(str==null) str="";
                 if(str.trim().length()==0) return;
-
+                progress.setVisibility(View.VISIBLE);
+                hideKeyboard();
                 searchGood(str,art);
             }
         });
@@ -178,38 +189,49 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
        // adapter.setData(buildData());
        // mList.setAdapter(adapter);
 
+        //searchGood("масло",false);
 
     }
+
+
 
     ArrayList<GoodJSON> goodsList=new ArrayList<>();
 
     private void searchGood(String str, boolean article)
     {
         Map<String, String> data = new HashMap<>();
-        data.put("name", str);
+        if(article){
+            data.put(ARTICLE, str);
+        }else{
+            data.put(NAME, str);
+            data.put(BARCODE, str);
+        }
+
 
         MainApplication.getApi().getGoodsList(data, new Callback<ArrayList<GoodJSON>>() {
             @Override
             public boolean sendResult(Response<ArrayList<GoodJSON>> response) {
 
-                goodsList=response.body();
-                Log.d("my","we get goods list !!!! "+goodsList.size());
+                progress.setVisibility(View.GONE);
+                goodsList.clear();
 
-                List<SimpleItemView.Data> result = new ArrayList<>();
-                for(GoodJSON good:goodsList){
-                    SimpleItemView.Data item = new SimpleItemView.Data();
-                    item.name =good.getName();
-                    item.repositories = new ArrayList<>();
-                    int repositoriesSize = random.nextInt(REPOSITORIES.length) + 1;
-                    for (int j = 1; j <= repositoriesSize; j++) {
-                        item.repositories.add(REPOSITORIES[(repositoriesSize + j) % REPOSITORIES.length]);
-                    }
-                    result.add(item);
-                }
+                ArrayList<GoodJSON> list =response.body();
+                if(list==null) return false;
+
+                Log.d("my","we get goods list !!!! "+list.size());
+                resultLb.setText("Найдено товаров: "+list.size());
+
+                GoodJSON good = new GoodJSON();
+                good.setBarcode("--------------");
+               // goodsList.add(good);
+
+                goodsList.addAll(list);
 
 
-                 SimpleAdapter adapter = new SimpleAdapter(ScannerOfflineActivity.this);
-                 adapter.setData(result);
+                 //SimpleAdapter adapter = new SimpleAdapter(ScannerOfflineActivity.this);
+                // adapter.setData(goodsList);
+
+                GoodsListAdapter adapter = new GoodsListAdapter(ScannerOfflineActivity.this, R.layout.row_expandable_item , goodsList);
                  mList.setAdapter(adapter);
 
                 return false;
@@ -219,26 +241,7 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
 
 
 
-    private List<SimpleItemView.Data> buildData() {
-        List<SimpleItemView.Data> result = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            SimpleItemView.Data item = new SimpleItemView.Data();
-            item.name = "" + NAMES[random.nextInt(NAMES.length)];
-            item.repositories = new ArrayList<>();
-            int repositoriesSize = random.nextInt(REPOSITORIES.length) + 1;
-            for (int j = 1; j <= repositoriesSize; j++) {
-                item.repositories.add(REPOSITORIES[(repositoriesSize + j) % REPOSITORIES.length]);
-            }
-            result.add(item);
-        }
-        return result;
-    }
 
-    private static final Random random = new Random(System.currentTimeMillis());
-    private static final String[] NAMES = new String[]{"Хлеб", "Масло", "Колбаса",
-            "Печиво Веселка", "Картошка", "Овсянка", "Хліб український звичайний нарізний Нива 0,5кг", "Макаронні вироби", "Цукор ваг."};
-    private static final String[] REPOSITORIES = new String[]{"Retrofit", "Picasso",
-            "Robospice", "RxJava", "Lombok", "Hrisey", "TimesSquare", "AOSP"};
 
 
     Dialog dialog;
@@ -431,5 +434,14 @@ public class ScannerOfflineActivity extends AppCompatActivity implements
 
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void hideKeyboard()
+    {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

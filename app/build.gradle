@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         compileSdkVersion 26
         // targetSdkVersion 19
-        versionCode 13
+        versionCode 14
         versionName "3.14"
      //   multiDexEnabled true
         compileOptions {
@@ -35,7 +35,14 @@ android {
     configurations { //for compile 'com.opencsv:opencsv:4.0'
         all*.exclude group: 'commons-logging', module: 'commons-logging'
     }
+
+    dexOptions {
+        jumboMode = true
+    }
 }
+
+
+
 
 repositories {
 
@@ -51,6 +58,8 @@ allprojects {
             dirs 'libs'
         }
         google()
+
+        maven { url "https://jitpack.io" }
     }
 }
 
@@ -87,20 +96,7 @@ dependencies {
     // compile 'com.opencsv:opencsv:3.8'
     compile 'com.opencsv:opencsv:4.0'
 
-    //compile 'com.android.support:appcompat-v7:23.1.0'   // Version 23+ is required
-    // Supports Android 4.0.3 and later (API level 15)
-    // compile 'com.journeyapps:zxing-android-embedded:2.0.1@aar'
-    // Supports Android 2.1 and later (API level 7), but not optimal for later Android versions.
-    // If you only plan on supporting Android 4.0.3 and up, you don't need to include this.
-    // compile 'com.journeyapps:zxing-android-legacy:2.0.1@aar'
-    // Convenience library to launch the scanning and encoding Activities.
-    // It automatically picks the best scanning library from the above two, depending on the
-    // Android version and what is available.
-    //compile 'com.journeyapps:zxing-android-integration:2.0.1@aar'
-    // Version 3.0.x of zxing core contains some code that is not compatible on Android 2.2 and earlier.
-    // This mostly affects encoding, but you should test if you plan to support these versions.
-    // Older versions e.g. 2.2 may also work if you need support for older Android versions.
-    // compile 'com.google.zxing:core:3.0.1'
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     //Jaybird_2_2_12
@@ -114,5 +110,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     compile 'com.rollbar:rollbar-android:0.2.1'
+
+    compile 'com.github.SilenceDut:ExpandableLayout:1.2.0'
 
 }

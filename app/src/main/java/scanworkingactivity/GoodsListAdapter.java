@@ -16,7 +16,6 @@ import com.app.barcodeclient3.R;
 import java.util.ArrayList;
 
 import essences.Good;
-import startactivity.MainActivity;
 
 
 public class GoodsListAdapter<T> extends ArrayAdapter<Good> {

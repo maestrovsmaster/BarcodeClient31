@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentCollapse"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,7 +20,8 @@
         android:layout_marginRight="0dp"
         android:background="@color/white"
 
-        app:cardCornerRadius="1px">
+        app:cardCornerRadius="1px"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,7 +61,7 @@
                 android:layout_toLeftOf="@id/searchBt"
                 android:layout_toStartOf="@id/searchBt"
                 android:layout_centerVertical="true"
-
+                android:text="14953"
 
 
                 android:drawableTint="@color/primary"
@@ -83,6 +85,7 @@
                 android:layout_marginLeft="6dp"
                 android:src="@drawable/ic_search_black_24dp"
                 android:drawableTint="@color/primary"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 />
 
 
@@ -90,6 +93,16 @@
 
 
         </RelativeLayout>
+
+            <TextView
+                android:id="@+id/resultLb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_text"
+                tools:text="Найдено товаров 1000"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -124,20 +137,55 @@
 
     </android.support.v7.widget.CardView>
 
-    <expandablerecyclerview.sample.SimpleExpandableRecyclerView
-        android:id="@+id/list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        />
+        android:layout_height="match_parent">
+
+
+
+        <expandablerecyclerview.sample.SimpleExpandableRecyclerView
+            android:id="@+id/list2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:visibility="gone"
+            />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp">
+
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            />
+
+
+
+
+
+
+
 
     <RelativeLayout
+        android:id="@+id/resultRelative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary_light">
 
 
+
+    </RelativeLayout>
 
     </RelativeLayout>
 

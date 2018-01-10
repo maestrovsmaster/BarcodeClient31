@@ -52,8 +52,6 @@ import android.widget.Toast;
 
 import com.app.barcodeclient3.R;
 import com.google.zxing.ResultPoint;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
@@ -81,7 +79,7 @@ import scanworkingactivity.CreateGoodDialog;
 import scanworkingactivity.GoodsListAdapter;
 import scanworkingactivity.ScanSettingsActivity;
 import scanworkingactivity.TotalGoodsListActivity;
-import startactivity.MainActivity;
+import oldbarcodestartactivity.MainActivity;
 
 import static main.ScannerConstants.CURRENT_SCAN_MODE;
 
@@ -93,7 +91,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
     // private CaptureManager capture;
     private DecoratedBarcodeView barcodeScannerView;
-    private ImageButton switchFlashlightButton;
+    private ImageView switchFlashlightButton;
     private ImageButton hideCameraButton;
 
 
@@ -205,12 +203,19 @@ public class NewScannerActivity extends AppCompatActivity implements
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         View view = getLayoutInflater().inflate(R.layout.dialog_camera, null);
-        switchFlashlightButton = (ImageButton) view.findViewById(R.id.switch_flashlight);
+        switchFlashlightButton =  view.findViewById(R.id.switch_flashlight);
         switchFlashlightButton.setTag("0");
         switchFlashlightButton.setImageResource(R.drawable.ic_highlight_white_36dp);
         if (!hasFlash()) {
             switchFlashlightButton.setVisibility(View.GONE);
         }
+        ImageView closeBt = view.findViewById(R.id.closeBt);
+        closeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         barcodeScannerView = (DecoratedBarcodeView) view.findViewById(R.id.zxing_barcode_scanner);
         barcodeScannerView.setTorchListener(this);
@@ -248,7 +253,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
         hideCameraButton = (ImageButton) findViewById(R.id.hide_camera);
         hideCameraButton.setTag("0");
-        hideCameraButton.setImageResource(R.drawable.ic_close_white_36dp);
+       // hideCameraButton.setImageResource(R.drawable.ic_close_white_36dp);
         hideCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -329,7 +334,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         closeButton = (ImageButton) mainActionBar.getCustomView().findViewById(R.id.closeButton);
         abarTitle = (TextView) mainActionBar.getCustomView().findViewById(R.id.abarTitle);
         TextView offlineTW = (TextView) mainActionBar.getCustomView().findViewById(R.id.offlineIcon);
-        if (MainActivity.OFFLINE_MODE) {
+        if (MainApplication.OFFLINE_MODE) {
             //offlineTW.setVisibility(View.VISIBLE);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         } else {
             offlineTW.setVisibility(View.GONE);
@@ -633,17 +638,17 @@ public class NewScannerActivity extends AppCompatActivity implements
     class ThreadScanSettings extends Thread {
         @Override
         public void run() {
-            if (!MainActivity.OFFLINE_MODE) {
+            if (!MainApplication.OFFLINE_MODE) {
                 RequestScanSettings requestScanSettings = new RequestScanSettings();
                 JSONObject scanJSON = requestScanSettings.getScanSettings();
                 Log.d("my", "scan settings = " + scanJSON.toString());
                 if (scanJSON.length() > 0) {
                     try {
-                        MainActivity.WEIGTH_BARCODE = scanJSON.getString("WEIGTH_BARCODE");
+                        MainApplication.WEIGTH_BARCODE = scanJSON.getString("WEIGTH_BARCODE");
                     } catch (Exception e) {
                     }
                     try {
-                        MainActivity.WEIGTH_BARCODE_MASK = scanJSON.getString("WEIGTH_BARCODE_MASK");
+                        MainApplication.WEIGTH_BARCODE_MASK = scanJSON.getString("WEIGTH_BARCODE_MASK");
                     } catch (Exception e) {
                     }
                 }
@@ -664,12 +669,12 @@ public class NewScannerActivity extends AppCompatActivity implements
 
 
     private void checkWeigthBarcode(String barcode) {
-        if (MainActivity.WEIGTH_BARCODE.length() >= 11 && MainActivity.WEIGTH_BARCODE_MASK.length() >= 2) {
+        if (MainApplication.WEIGTH_BARCODE.length() >= 11 && MainApplication.WEIGTH_BARCODE_MASK.length() >= 2) {
 
             //String pref1=MainActivity.WEIGTH_BARCODE.substring(2,4);
             //String pref2=MainActivity.WEIGTH_BARCODE.substring(2,4);
             //String pref3=MainActivity.WEIGTH_BARCODE.substring(2,4);
-            getScanPrefixs(MainActivity.WEIGTH_BARCODE);
+            getScanPrefixs(MainApplication.WEIGTH_BARCODE);
 
         }
     }
@@ -824,14 +829,14 @@ public class NewScannerActivity extends AppCompatActivity implements
             RequestGoodsList requestServer = new RequestGoodsList();
             ArrayList<Good> goodsList = new ArrayList<>();
             Log.d("my", "IS checked = " + searchArticle.isChecked());
-            if (!MainActivity.OFFLINE_MODE) {
+            if (!MainApplication.OFFLINE_MODE) {
                 if (!searchArticle.isChecked()) {
                     goodsList = requestServer.getGoodsListByBarcode(id, barcode, article, name);
                 } else {
                     goodsList = requestServer.getGoodsListByBarcode(id, "", article, "");
                 }
             }
-            if (MainActivity.OFFLINE_MODE) {
+            if (MainApplication.OFFLINE_MODE) {
                 if (!searchArticle.isChecked()) {
                     goodsList = MainApplication.dbHelper.getGoodList(name, article, barcode, id);
                 } else {
@@ -866,7 +871,7 @@ public class NewScannerActivity extends AppCompatActivity implements
                 case 0:
                     clearGoodInfo();
                     searchFocusable(true);
-                    if (MainActivity.OFFLINE_MODE) {//dialog. Tovar ne naiden sozdat' ?
+                    if (MainApplication.OFFLINE_MODE) {//dialog. Tovar ne naiden sozdat' ?
 					/*	createGoodDialogBuilder = new AlertDialog.Builder(ScanWorkingActivity.this);
 						createGoodDialogBuilder.setMessage(getString(R.string.good_not_found_create)).setPositiveButton(getString(R.string.create), createGoodDialogClickListener)
 								.setNegativeButton(getString(R.string.cancel), createGoodDialogClickListener);
@@ -1458,7 +1463,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         @Override
         public void run() {
 
-            if (MainActivity.OFFLINE_MODE) {
+            if (MainApplication.OFFLINE_MODE) {
                 MainApplication.dbHelper.insertGoodsAcCnt(invId, goodId, cnt);
                 tempOfflineAnsCnt = MainApplication.dbHelper.getGoodCountAcc(invId, goodId);
                 h2.post(readyOffLineInvWriteCnt);
@@ -1607,7 +1612,7 @@ public class NewScannerActivity extends AppCompatActivity implements
         //exportInvToXLS()
 
         String expType = "";
-        if (!MainActivity.OFFLINE_MODE) {
+        if (!MainApplication.OFFLINE_MODE) {
             expType = getString(R.string.export_server);
         } else {
             expType = getString(R.string.export_file);
@@ -1619,7 +1624,7 @@ public class NewScannerActivity extends AppCompatActivity implements
                 .setPositiveButton(expType, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (MainActivity.OFFLINE_MODE) {
+                        if (MainApplication.OFFLINE_MODE) {
                             exportInvToXLS();
                         } else {
                             exportProgress.setVisibility(View.VISIBLE);
@@ -1865,7 +1870,7 @@ public class NewScannerActivity extends AppCompatActivity implements
 
             Button folder = (Button) view.findViewById(R.id.folder);
             folder.setOnClickListener(goodsListListener);
-            if (MainActivity.OFFLINE_MODE) folder.setVisibility(View.GONE);
+            if (MainApplication.OFFLINE_MODE) folder.setVisibility(View.GONE);
 
             view.findViewById(R.id.list).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -2353,7 +2358,8 @@ public class NewScannerActivity extends AppCompatActivity implements
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return false;//barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
+        finish();
+        return true;//barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
     /**

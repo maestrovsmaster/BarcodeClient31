@@ -2,21 +2,17 @@ package scanworkingactivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -28,8 +24,6 @@ import java.util.List;
 
 import essences.Good;
 import main.MainApplication;
-import requests.RequestInventoryDtEditCnt;
-import startactivity.MainActivity;
 
 
 public class TotalGoodsListAdapter extends BaseAdapter {
@@ -144,7 +138,7 @@ public class TotalGoodsListAdapter extends BaseAdapter {
             if(docId>=0) fcntEditText.setVisibility(View.VISIBLE);
             else fcntEditText.setVisibility(View.GONE);
 
-            if(!MainActivity.OFFLINE_MODE) fcntEditText.setVisibility(View.GONE);
+            if(!MainApplication.OFFLINE_MODE) fcntEditText.setVisibility(View.GONE);
 
             fcntEditText.setOnKeyListener(new View.OnKeyListener() {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -167,7 +161,7 @@ public class TotalGoodsListAdapter extends BaseAdapter {
                             try {
                                 double cnt = Double.parseDouble(value);
 
-                                if(MainActivity.OFFLINE_MODE){
+                                if(MainApplication.OFFLINE_MODE){
                                     MainApplication.dbHelper.insertGoodsAcCnt(docId, good.getId(), cnt);
                                     Double tempOfflineAnsCnt= MainApplication.dbHelper.getGoodCountAcc(docId,good.getId());
                                     if(tempOfflineAnsCnt==cnt){

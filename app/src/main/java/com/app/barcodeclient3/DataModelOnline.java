@@ -160,6 +160,7 @@ public class DataModelOnline implements DataModelInterface{
     public void getGoodsList(Map<String,String> map,@NonNull Callback callback) {
 
         final Callback call1=callback;
+        final Map<String,String> options = map;
 
         Thread thread = new Thread(){
             @Override
@@ -168,6 +169,38 @@ public class DataModelOnline implements DataModelInterface{
                 if(isConnect()) {
                     Log.d("my","goods get is connect ok");
                     String statement = getAppContext().getString(R.string.request_goods);
+
+                    boolean or = false;
+
+                    if(options.containsKey(NAME)||options.containsKey(ARTICLE)||options.containsKey(BARCODE)){
+                        statement+=getAppContext().getString(R.string.request_where);
+
+                        if(options.containsKey(NAME)){
+                            if(or) statement+=getAppContext().getString(R.string.request_or);
+                            String name = options.get(NAME).trim();
+                            statement+=getAppContext().getString(R.string.request_goods_by_name);
+                            statement+=("'"+name+"'");
+                            or=true;
+                        }
+
+                        if(options.containsKey(ARTICLE)){
+                            if(or) statement+=getAppContext().getString(R.string.request_or);
+                            String article = options.get(ARTICLE).trim();
+                            statement+=getAppContext().getString(R.string.request_goods_by_article);
+                            statement+=("'"+article+"'");
+                            or=true;
+                        }
+
+                        if(options.containsKey(BARCODE)){
+                            if(or) statement+=getAppContext().getString(R.string.request_or);
+                            String barcode = options.get(BARCODE).trim();
+                            statement+=getAppContext().getString(R.string.request_goods_by_barcode);
+                            statement+=("'"+barcode+"')");
+                            or=true;
+                        }
+                    }
+
+
                     JSONArray jsonArray = executeStatement(statement);
                     Log.d("my","goods get stm ="+statement);
                     if (jsonArray != null) {
@@ -181,7 +214,7 @@ public class DataModelOnline implements DataModelInterface{
                                     Gson gson = new Gson();
                                     GoodJSON goodJSON = gson.fromJson(obj.toString(),GoodJSON.class);
                                     if(goodJSON!=null){
-                                        Log.d("my","goods ===+++= ok"+goodJSON.getName());
+                                       // Log.d("my","goods ===+++= ok"+goodJSON.getName());
                                         goodsList.add(goodJSON);
                                     }
                                     else Log.d("my","goods =---err");
@@ -212,7 +245,11 @@ public class DataModelOnline implements DataModelInterface{
 
     }
 
-
+    @Override
+    @Deprecated
+    public String createInventory(int id, String num, String datetime, String subdiv, int doc_type) {
+        return null;
+    }
 
 
 }

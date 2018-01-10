@@ -40,8 +40,11 @@
             android:layout_height="52dp"
             android:onClick="switchFlashlight"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-
+            android:layout_toEndOf="@id/searchArticle"
+            android:layout_toRightOf="@id/searchArticle"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_camera_alt_white_36dp"
+            android:tint="@color/accent"
              />
 
 

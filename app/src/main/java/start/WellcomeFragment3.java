@@ -1,9 +1,7 @@
 package start;
 
 import android.app.Fragment;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -11,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,11 +19,9 @@ import com.app.barcodeclient3.R;
 
 import org.json.JSONObject;
 
-import adapter.DatabaseHelper;
 import adapter.Utils;
 import main.MainApplication;
 import requests.RequestDBVersion;
-import startactivity.MainActivity;
 
 /**
  * Created by userd088 on 30.03.2016.
@@ -94,9 +89,9 @@ public class WellcomeFragment3 extends Fragment {
                 serverIP = tempstr;
                 Log.d("my","our serv = "+serverIP);
                 MainApplication.dbHelper.insertOrReplaceOption("IP", serverIP);//dbHelper.setServerIp(serverIP);
-                MainActivity.serverIP = serverIP;
+                MainApplication.serverIP = serverIP;
 
-                MainActivity.mainURL = "http://" + MainActivity.serverIP + ":" + MainActivity.serverPort + "/" + MainActivity.serverName;
+                MainApplication.mainURL = "http://" + MainApplication.serverIP + ":" + MainApplication.serverPort + "/" + MainApplication.serverName;
                 h0.post(new Runnable() {
                     @Override
                     public void run() {
@@ -122,7 +117,7 @@ Handler h0 = new Handler();
         getDBVersion=null;
         getDBVersion = new GetVersionThread();
         getDBVersion.start();
-        stateUrl = MainActivity.mainURL + "/StateServlet";
+        stateUrl = MainApplication.mainURL + "/StateServlet";
         Log.d("my", "servet url = " + stateUrl);
         //webView.loadUrl(stateUrl);
 
@@ -163,12 +158,12 @@ Handler h0 = new Handler();
             {
                 if(ver.length()>0)
                 {
-                    MainActivity.OFFLINE_MODE=false;
+                    MainApplication.OFFLINE_MODE=false;
                     successAction();
 
                 }
                 else{
-                    MainActivity.OFFLINE_MODE=true;
+                    MainApplication.OFFLINE_MODE=true;
                     noDBAnswerAction();
 
                 }

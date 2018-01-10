@@ -6,7 +6,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
@@ -20,8 +19,6 @@ import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
 import com.app.barcodeclient3.R;
-
-import startactivity.MainActivity;
 
 
 public class SettingsActivity extends Activity  {
@@ -84,8 +81,8 @@ private boolean isLogined = true;
 						MainApplication.dbHelper.insertOrReplaceOption("PORT",port);
 						//MainActivity.dbHelper.setServerIp(ip);
 						//MainActivity.dbHelper.setServerPort(port);
-						MainActivity.serverIP=ip;
-						MainActivity.serverPort=port;
+						MainApplication.serverIP=ip;
+						MainApplication.serverPort=port;
 
 						exitH.post(new Runnable() {
 							@Override

@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,17 +29,13 @@ import essences.BillIn;
 import essences.BillInDt;
 import essences.Employee;
 import essences.Good;
-import essences.Inventory;
 import essences.JorDtTable;
 import essences.JorHeadTable;
-import essences.Organization;
 import essences.Subdivision;
 import essences.Unit;
 import main.Dom;
 import main.MainApplication;
 import requests.Request;
-import requests.RequestInventoryList;
-import startactivity.MainActivity;
 
 
 public class DockDetailsActivity extends AppCompatActivity //ListActivity

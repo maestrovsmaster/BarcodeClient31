@@ -13,7 +13,8 @@ import java.util.ArrayList;
 
 import essences.Inventory;
 import essences.Subdivision;
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestInventoryList {
 	
@@ -39,7 +40,7 @@ public class RequestInventoryList {
             String  returnString="";
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/InventorysListServlet");
+                 URL url = new URL(MainApplication.mainURL+"/InventorysListServlet");
                  URLConnection connection = url.openConnection();
 
                  JSONObject jsonObject = new JSONObject();

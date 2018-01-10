@@ -9,7 +9,8 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 
-import startactivity.MainActivity;
+import main.MainApplication;
+import oldbarcodestartactivity.MainActivity;
 
 public class RequestScanSettings {
 	
@@ -46,7 +47,7 @@ public class RequestScanSettings {
 
     		
     		 try{
-                 URL url = new URL(MainActivity.mainURL+"/WeigthParamsServlet");
+                 URL url = new URL(MainApplication.mainURL+"/WeigthParamsServlet");
                  URLConnection connection = url.openConnection();
                  
                  JSONObject  jsonObject = new JSONObject();

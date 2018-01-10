@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:paddingTop="20dp">
 
 
     <TextView
+        android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/create_inventory"
-        android:id="@+id/textView5"
-        android:gravity="center_vertical|center_horizontal"
-        android:textSize="18sp"
         android:background="@color/indigo_100"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/create_inventory"
+        android:textSize="18sp"
         android:visibility="gone" />
 
     <EditText
+        android:id="@+id/idEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:ems="10"
-        android:id="@+id/idEditText"
-        android:hint="@string/num" />
+        android:hint="@string/num"
+        android:inputType="number" />
 
     <EditText
+        android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/nameEditText"
         android:hint="@string/subdivision" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingBottom="4dp">
+        android:paddingRight="4dp">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
             android:id="@+id/cancelBt"
-            android:layout_weight="1"
-            android:background="@drawable/blue_button_left"
-            android:layout_marginRight="1dp" />
-
-        <Button
+            style="?attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create"
-            android:id="@+id/createBt"
             android:layout_weight="1"
-            android:background="@drawable/blue_button_right" />
+            android:text="@string/cancel"
+
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/createBt"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textColor="@color/green"
+            />
     </LinearLayout>
 
 </LinearLayout>

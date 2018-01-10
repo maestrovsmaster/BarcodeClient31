@@ -121,4 +121,6 @@
     <string name="back_to_invs_list">Повернутися до списку переобліків</string>
     <string name="adding_of_new_good">Створення нового товару</string>
     <string name="article_search">пошук за артикулом</string>
+    <string name="settings_online_connect_checkbox">Використовувати безпосереднє з\'єднання з Firedird БД (new)</string>
+    <string name="settings_barcodeserver_connect_checkbox">З\'єднання з BarcodeServer31 (old)</string>
 </resources>
